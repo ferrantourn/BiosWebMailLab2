@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteAlumno.Master.cs"
+    Inherits="BiosWebMail.SiteAlumno" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            width: 800px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div style="width: 800px; margin: auto" id="page-container">
+        <table>
+            <tr>
+                <td style="background-image: url(../Images/Tope.jpg); width: 800px; height: 100px">
+                    <div style="float: right">
+                        <asp:Image runat="server" Width="110px" Height="100px" ID="imgUser" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div style="float: left" id="menu">
+                        <asp:Menu ID="MenuAlumno" runat="server" Orientation="Horizontal" BackColor="#F7F6F3"
+                            DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="12px" ForeColor="#7C6F57"
+                            StaticSubMenuIndent="10px">
+                            <DynamicHoverStyle BackColor="#7C6F57" ForeColor="White" />
+                            <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                            <DynamicMenuStyle BackColor="#F7F6F3" />
+                            <DynamicSelectedStyle BackColor="#5D7B9D" />
+                            <Items>
+                                <asp:MenuItem NavigateUrl="~/AdminAlumno/Home.aspx" ImageUrl="~/Images/home24.png" Text="Home" Value="Home"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/AdminAlumno/Email.aspx" ImageUrl="~/Images/newemail24.png" Text="Nuevo Email" Value="Nuevo Email">
+                                </asp:MenuItem>
+                            </Items>
+                            <StaticHoverStyle BackColor="#7C6F57" ForeColor="White" />
+                            <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                            <StaticSelectedStyle BackColor="#5D7B9D" />
+                        </asp:Menu>
+                    </div>
+                    <div style="float: right">
+                        <asp:Panel ID="PanelLogout" runat="server">
+                            <asp:Label ID="lblLogueadoComo" runat="server"></asp:Label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="LogOut" />
+                        </asp:Panel>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <div id="content">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                        <br />
+                        <asp:Label runat="server" ID="lblError"></asp:Label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

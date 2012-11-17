@@ -1,0 +1,70 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="BiosWebMail.Masters.Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div style="width: 800px; margin: auto">
+        <table style="width: 100%" cellpadding="0px" cellspacing="0px">
+            <tr>
+                <td style="background-image: url(Images/Tope.jpg); width: 800px; height: 100px">
+                    <div style="float: right; color: White; margin: 10px 10px 10px 10px">
+                        <asp:Panel ID="PanelLogin" runat="server" Height="80px" Width="275px">
+                            <table>
+                                <tr>
+                                    <td>
+                                        Usuario:
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtUsuario" Width="100px" runat="server"></asp:TextBox>
+                                        <asp:RequiredFieldValidator Font-Size="10px" ForeColor="Wheat" ID="RequiredFieldValidatorUserName"
+                                            runat="server" ErrorMessage="Ingresa Usuario" Display="Dynamic" ValidationGroup="GrupoLogin"
+                                            ControlToValidate="txtUsuario"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Contraseña:
+                                    </td>
+                                    <td>
+                                        <asp:TextBox ID="txtPass" Width="100px" TextMode="Password" runat="server"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ForeColor="Wheat" Font-Size="10px" ID="RequiredFieldValidatorPassword"
+                                            runat="server" ErrorMessage="Ingresa Contraseña" Display="Dynamic" ValidationGroup="GrupoLogin"
+                                            ControlToValidate="txtPass"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Button ID="btnLogin" ValidationGroup="GrupoLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblError" runat="server" Font-Size="Large" Style="color: #FF0000"></asp:Label>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                    <asp:Label runat="server" ID="lblInfo"></asp:Label>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>
