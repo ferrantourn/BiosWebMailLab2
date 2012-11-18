@@ -231,7 +231,7 @@ namespace Persistencia
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+                throw new ApplicationException("Problemas con la base de datos:ListarEmailsEnviados" + ex.Message);
             }
             finally
             {

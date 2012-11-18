@@ -199,11 +199,11 @@ namespace Persistencia
             return c;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ciAlumno"></param>
-        /// <returns></returns>
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="a"></param>
+       /// <returns></returns>
         public List<Carpeta> ListarCarpetasAlumno(Alumno a)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
@@ -214,7 +214,6 @@ namespace Persistencia
             cmd.Parameters.Add(_ci);
 
             SqlDataReader reader;
-            Carpeta c = null;
             List<Carpeta> carpetas = new List<Carpeta>();
             //Usuario _usuario;
             Alumno _usuario;
@@ -226,23 +225,26 @@ namespace Persistencia
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
+                    Carpeta c = new Carpeta();
+
                     _numCarpeta = (int)reader["NumeroCarpeta"];
                     _nomCarpeta = (string)reader["NombreCarpeta"];
                     //_usuario = new Usuario(ciAlumno, "", "", "", "");
                     _usuario = new Alumno {CI = a.CI};
                     c.NUMERO_CARPETA = _numCarpeta;
+                    c.NOMBRE_CARPETA = _nomCarpeta;
                     int _totalEmails = ContarMailsCarpeta(c);
                     int _totalEmalsUnRead = ContarMailsCarpetaSinLeer(c);
-
-                    c = new Carpeta(_usuario, _numCarpeta, _nomCarpeta, _totalEmails, _totalEmalsUnRead);
-
+                    c.USUARIO = _usuario;
+                    c.TOTAL_EMAILS = _totalEmails;
+                    c.TOTAL_EMAILS_NOLEIDOS = _totalEmalsUnRead;
                     carpetas.Add(c);
                 }
                 reader.Close();
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+                throw new ApplicationException("Problemas con la base de datos: ListarCarpetasAlumno" + ex.Message);
             }
             finally
             {

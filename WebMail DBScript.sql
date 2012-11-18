@@ -49,7 +49,7 @@ create table Carpeta(Ci int not null,
 
 GO
 
-create table Mail(NumeroMail bigint primary key identity,
+create table Mail(NumeroMail int primary key identity,
 				  CiR int not null,
 				  NumeroCarpetaR int not null,
 
