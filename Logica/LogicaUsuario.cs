@@ -1,8 +1,6 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Entidades;
 using Persistencia;
 
@@ -23,12 +21,13 @@ namespace Logica
 
 
 
-        public Docente getDocente(string userName)
+        //public Docente getDocente(string userName)
+        public Docente getDocente(Docente d)
         {
             try
             {
                 IPersistenciaDocentes persDocente = FabricaPersistencia.getPersistenciaDocentes();
-                return persDocente.BuscarDocente(userName);
+                return persDocente.BuscarDocente(d.NOMBRE_USUARIO);
             }
             catch (Exception ex)
             {
@@ -37,12 +36,13 @@ namespace Logica
         }
 
 
-        public Alumno getAlumno(string userName)
+        //public Alumno getAlumno(string userName)
+        public Alumno getAlumno(Alumno a)
         {
             try
             {
                 IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                return persAlumnos.BuscarAlumno(userName);
+                return persAlumnos.BuscarAlumno(a.NOMBRE_USUARIO);
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace Logica
         }
 
 
-        public void ModificarDocente (Docente d)
+        public void ModificarDocente(Docente d)
         {
             try
             {
@@ -190,14 +190,15 @@ namespace Logica
         /// <summary>
         /// ACTUALIZA EL STATUS DE ACTIVO/NOACTIVO DE UN ALUMNO 
         /// </summary>
-        /// <param name="ci">Esta de cedula del alumno</param>
-        /// <param name="SetActiveStatus"></param>
-        public void ActualizarStatusAlumno(int ci, bool SetActiveStatus)
+        /// <param name="a"></param>
+        /// <param name="setActiveStatus"></param>
+        public void ActualizarStatusAlumno(Alumno a, bool setActiveStatus)
         {
             try
             {
                 IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                persAlumnos.ActualizarStatusAlumno(ci,SetActiveStatus);
+                a.ACTIVO = setActiveStatus;
+                persAlumnos.ActualizarStatusAlumno(a);
             }
             catch (Exception ex)
             {

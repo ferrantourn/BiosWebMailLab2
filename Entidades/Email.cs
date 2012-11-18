@@ -31,8 +31,6 @@ namespace Entidades
         }
 
 
-  
-
         private string _cuerpo;
         public string CUERPO
         {

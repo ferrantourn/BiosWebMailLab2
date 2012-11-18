@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Entidades;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using Entidades;
 
 namespace Persistencia
 {
@@ -73,14 +71,14 @@ namespace Persistencia
         /// Lista los emails del sistema
         /// </summary>
         /// <param name="numeroCarpeta"></param>a
-        public List<Email> ListarEmails(int numeroCarpeta)
+        public List<Email> ListarEmails(Carpeta c)
         {
             List<Email> _listaEmail = new List<Email>();
 
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spListarMails", conexion, CommandType.StoredProcedure);
 
-            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", numeroCarpeta);
+            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", c.NUMERO_CARPETA);
 
             cmd.Parameters.Add(_numeroCarpeta);
 
@@ -95,7 +93,9 @@ namespace Persistencia
                 bool _leido;
                 int _numeroEmail;
                 int _numCarpetaRem, _numCarpetaDest;
-                Usuario _usuarioRemitente, _usuarioDestinatario;
+                //Usuario _usuarioRemitente, _usuarioDestinatario;
+                Alumno _usuarioRemitente, _usuarioDestinatario;
+
                 Carpeta _carpetaRemitente, _carpetaDestinatario;
                 DateTime _fecha;
 
@@ -117,9 +117,22 @@ namespace Persistencia
                     _nombreCarpetaDest = (string)_Reader["NombreCarpetaDest"];
                     _fecha = (DateTime)_Reader["Fecha"];
 
-                    _usuarioRemitente = new Usuario(0, _nombreUsuarioRem, _nombreRemitente, _apellidoRem, "");
+                    // _usuarioRemitente = new Usuario(0, _nombreUsuarioRem, _nombreRemitente, _apellidoRem, "");
+                    _usuarioRemitente = new Alumno
+                    {
+                        NOMBRE_USUARIO = _nombreUsuarioRem,
+                        NOMBRE = _nombreRemitente,
+                        APELLIDO = _apellidoRem
+                    };
                     _carpetaRemitente = new Carpeta(_usuarioRemitente, _numCarpetaRem, _nombreCarpetaRem);
-                    _usuarioDestinatario = new Usuario(0, _nombreUsuarioDest, _nombreDestinatario, _apellidoDest, "");
+                    //_usuarioDestinatario = new Usuario(0, _nombreUsuarioDest, _nombreDestinatario, _apellidoDest, "");
+                    _usuarioDestinatario = new Alumno
+                    {
+                        NOMBRE_USUARIO = _nombreUsuarioDest,
+                        NOMBRE = _nombreDestinatario,
+                        APELLIDO = _apellidoDest
+                    };
+
                     _carpetaDestinatario = new Carpeta(_usuarioDestinatario, _numCarpetaDest, _nombreCarpetaDest);
 
                     Email e = new Email(_numeroEmail, _asunto, _leido, _cuerpo, _carpetaRemitente, _carpetaDestinatario, _fecha);
@@ -144,14 +157,14 @@ namespace Persistencia
         /// Lista los emails del sistema
         /// </summary>
         /// <param name="numeroCarpeta"></param>a
-        public List<Email> ListarEmailsEnviados(int numeroCarpeta)
+        public List<Email> ListarEmailsEnviados(Carpeta c)
         {
             List<Email> _listaEmail = new List<Email>();
 
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spListarMailsEnviados", conexion, CommandType.StoredProcedure);
 
-            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", numeroCarpeta);
+            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", c.NUMERO_CARPETA);
 
             cmd.Parameters.Add(_numeroCarpeta);
 
@@ -166,7 +179,9 @@ namespace Persistencia
                 bool _leido;
                 int _numeroEmail;
                 int _numCarpetaRem, _numCarpetaDest;
-                Usuario _usuarioRemitente, _usuarioDestinatario;
+                //Usuario _usuarioRemitente, _usuarioDestinatario;
+                Alumno _usuarioRemitente, _usuarioDestinatario;
+
                 Carpeta _carpetaRemitente, _carpetaDestinatario;
                 DateTime _fecha;
 
@@ -188,9 +203,24 @@ namespace Persistencia
                     _nombreCarpetaDest = (string)_Reader["NombreCarpetaDest"];
                     _fecha = (DateTime)_Reader["Fecha"];
 
-                    _usuarioRemitente = new Usuario(0, _nombreUsuarioRem, _nombreRemitente, _apellidoRem, "");
+                    //_usuarioRemitente = new Usuario(0, _nombreUsuarioRem, _nombreRemitente, _apellidoRem, "");
+                    _usuarioRemitente = new Alumno
+                                            {
+                                                NOMBRE_USUARIO = _nombreUsuarioRem,
+                                                NOMBRE = _nombreRemitente,
+                                                APELLIDO = _apellidoRem
+                                            };
+
                     _carpetaRemitente = new Carpeta(_usuarioRemitente, _numCarpetaRem, _nombreCarpetaRem);
-                    _usuarioDestinatario = new Usuario(0, _nombreUsuarioDest, _nombreDestinatario, _apellidoDest, "");
+                    //_usuarioDestinatario = new Usuario(0, _nombreUsuarioDest, _nombreDestinatario, _apellidoDest, "");
+                    _usuarioDestinatario = new Alumno
+                    {
+                        NOMBRE_USUARIO = _nombreUsuarioDest,
+                        NOMBRE = _nombreDestinatario,
+                        APELLIDO = _apellidoDest
+                    };
+
+
                     _carpetaDestinatario = new Carpeta(_usuarioDestinatario, _numCarpetaDest, _nombreCarpetaDest);
 
                     Email e = new Email(_numeroEmail, _asunto, _leido, _cuerpo, _carpetaRemitente, _carpetaDestinatario, _fecha);
@@ -215,14 +245,14 @@ namespace Persistencia
         /// Lista los emails del sistema
         /// </summary>
         /// <param name="numeroCarpeta"></param>a
-        public List<Email> ListarEmailsRecibidos(int numeroCarpeta)
+        public List<Email> ListarEmailsRecibidos(Carpeta c)
         {
             List<Email> _listaEmail = new List<Email>();
 
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spListarMailsRecibidos", conexion, CommandType.StoredProcedure);
 
-            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", numeroCarpeta);
+            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", c.NUMERO_CARPETA);
 
             cmd.Parameters.Add(_numeroCarpeta);
 
@@ -237,7 +267,9 @@ namespace Persistencia
                 bool _leido;
                 int _numeroEmail;
                 int _numCarpetaRem, _numCarpetaDest;
-                Usuario _usuarioRemitente, _usuarioDestinatario;
+                //Usuario _usuarioRemitente, _usuarioDestinatario;
+                Alumno _usuarioRemitente, _usuarioDestinatario;
+
                 Carpeta _carpetaRemitente, _carpetaDestinatario;
                 DateTime _fecha;
 
@@ -259,9 +291,22 @@ namespace Persistencia
                     _nombreCarpetaDest = (string)_Reader["NombreCarpetaDest"];
                     _fecha = (DateTime)_Reader["Fecha"];
 
-                    _usuarioRemitente = new Usuario(0, _nombreUsuarioRem, _nombreRemitente, _apellidoRem, "");
+                    //_usuarioRemitente = new Usuario(0, _nombreUsuarioRem, _nombreRemitente, _apellidoRem, "");
+                    _usuarioRemitente = new Alumno
+                                            {
+                                                NOMBRE_USUARIO = _nombreUsuarioRem,
+                                                NOMBRE = _nombreRemitente,
+                                                APELLIDO = _apellidoRem
+                                            };
+
                     _carpetaRemitente = new Carpeta(_usuarioRemitente, _numCarpetaRem, _nombreCarpetaRem);
-                    _usuarioDestinatario = new Usuario(0, _nombreUsuarioDest, _nombreDestinatario, _apellidoDest, "");
+                    //_usuarioDestinatario = new Usuario(0, _nombreUsuarioDest, _nombreDestinatario, _apellidoDest, "");
+                    _usuarioDestinatario = new Alumno
+                    {
+                        NOMBRE_USUARIO = _nombreUsuarioDest,
+                        NOMBRE = _nombreDestinatario,
+                        APELLIDO = _apellidoDest
+                    };
                     _carpetaDestinatario = new Carpeta(_usuarioDestinatario, _numCarpetaDest, _nombreCarpetaDest);
 
                     Email e = new Email(_numeroEmail, _asunto, _leido, _cuerpo, _carpetaRemitente, _carpetaDestinatario, _fecha);
@@ -286,13 +331,13 @@ namespace Persistencia
         /// ELIMINA UN EMAIL DE LA BASE DE DATOS
         /// </summary>
         /// <param name="NumeroEmail"></param>
-        public void EliminarEmail(int NumeroEmail, int numCarpeta)
+        public void EliminarEmail(Email e, Carpeta c)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spEliminarEmail", conexion, CommandType.StoredProcedure);
 
-            SqlParameter _numeroEmail = new SqlParameter("@NumeroMail", NumeroEmail);
-            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", numCarpeta);
+            SqlParameter _numeroEmail = new SqlParameter("@NumeroMail", e.NUMERO_EMAIL);
+            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", c.NUMERO_CARPETA);
 
 
             cmd.Parameters.Add(_numeroEmail);
@@ -318,14 +363,14 @@ namespace Persistencia
         /// MUEVE UN EMAIL DE CARPETA
         /// </summary>
         /// <param name="NumeroEmail"></param>
-        public void MoverEmail(int NumeroEmail, int numCarpetaActual,int numCarpetaDestino)
+        public void MoverEmail(Email e, Carpeta carpetaActual, Carpeta carpetaDestino)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spMoverEmail", conexion, CommandType.StoredProcedure);
 
-            SqlParameter _numeroEmail = new SqlParameter("@NumeroEmail", NumeroEmail);
-            SqlParameter _numCarpetaActual = new SqlParameter("@NumeroCarpetaActual", numCarpetaActual);
-            SqlParameter _numCarpetaDestino = new SqlParameter("@NumeroCarpetaDestino", numCarpetaDestino);
+            SqlParameter _numeroEmail = new SqlParameter("@NumeroEmail", e.NUMERO_EMAIL);
+            SqlParameter _numCarpetaActual = new SqlParameter("@NumeroCarpetaActual", carpetaActual.NUMERO_CARPETA);
+            SqlParameter _numCarpetaDestino = new SqlParameter("@NumeroCarpetaDestino", carpetaDestino.NUMERO_CARPETA);
 
             cmd.Parameters.Add(_numeroEmail);
             cmd.Parameters.Add(_numCarpetaActual);
@@ -351,12 +396,12 @@ namespace Persistencia
         /// </summary>
         /// <param name="numeroEmail"></param>
         /// <returns></returns>
-        public Email GetEmail(int numeroEmail)
+        public Email GetEmail(Email e)
         {
             Email EmailRetorno = new Email();
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spGetmail", conexion, CommandType.StoredProcedure);
-            SqlParameter _numeroEmail = new SqlParameter("@NumeroMail", numeroEmail);
+            SqlParameter _numeroEmail = new SqlParameter("@NumeroMail", e.NUMERO_EMAIL);
 
             cmd.Parameters.Add(_numeroEmail);
 
@@ -370,7 +415,9 @@ namespace Persistencia
                     _apellidoDest, _nombreUsuarioRem, _nombreUsuarioDest, _nombreCarpetaRem, _nombreCarpetaDest;
                 bool _leido;
                 int _numCarpetaRem, _numCarpetaDest;
-                Usuario _usuarioRemitente, _usuarioDestinatario;
+                //Usuario _usuarioRemitente, _usuarioDestinatario;
+                Alumno _usuarioRemitente, _usuarioDestinatario;
+
                 Carpeta _carpetaRemitente, _carpetaDestinatario;
                 DateTime _fecha;
 
@@ -391,13 +438,24 @@ namespace Persistencia
                     _nombreCarpetaDest = (string)_Reader["NombreCarpetaDest"];
                     _fecha = (DateTime)_Reader["Fecha"];
 
-                    _usuarioRemitente = new Usuario(0, _nombreUsuarioRem, _nombreRemitente, _apellidoRem, "");
+                    //_usuarioRemitente = new Usuario(0, _nombreUsuarioRem, _nombreRemitente, _apellidoRem, "");
+                    _usuarioRemitente = new Alumno
+                    {
+                        NOMBRE_USUARIO = _nombreUsuarioRem,
+                        NOMBRE = _nombreRemitente,
+                        APELLIDO = _apellidoRem
+                    };
                     _carpetaRemitente = new Carpeta(_usuarioRemitente, _numCarpetaRem, _nombreCarpetaRem);
-                    _usuarioDestinatario = new Usuario(0, _nombreUsuarioDest, _nombreDestinatario, _apellidoDest, "");
+                    //_usuarioDestinatario = new Usuario(0, _nombreUsuarioDest, _nombreDestinatario, _apellidoDest, "");
+                    _usuarioDestinatario = new Alumno
+                    {
+                        NOMBRE_USUARIO = _nombreUsuarioDest,
+                        NOMBRE = _nombreDestinatario,
+                        APELLIDO = _apellidoDest
+                    };
                     _carpetaDestinatario = new Carpeta(_usuarioDestinatario, _numCarpetaDest, _nombreCarpetaDest);
 
-                    EmailRetorno = new Email(numeroEmail, _asunto, _leido, _cuerpo, _carpetaRemitente, _carpetaDestinatario,
-                                        _fecha);
+                    EmailRetorno = new Email(e.NUMERO_EMAIL, _asunto, _leido, _cuerpo, _carpetaRemitente, _carpetaDestinatario,_fecha);
                 }
             }
             catch (Exception ex)
@@ -419,12 +477,12 @@ namespace Persistencia
         /// MARCA UN EMAIL COMO LEIDO
         /// </summary>
         /// <param name="NumeroEmail"></param>
-        public void MarcarEmailLeido(int NumeroEmail, int numeroCarpeta)
+        public void MarcarEmailLeido(Email e, Carpeta c)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spMarcarMailComoLeido", conexion, CommandType.StoredProcedure);
-            SqlParameter _numeroEmail = new SqlParameter("@NumeroMail", NumeroEmail);
-            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", numeroCarpeta);
+            SqlParameter _numeroEmail = new SqlParameter("@NumeroMail", e.NUMERO_EMAIL);
+            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", c.NUMERO_CARPETA);
 
             cmd.Parameters.Add(_numeroEmail);
             cmd.Parameters.Add(_numeroCarpeta);

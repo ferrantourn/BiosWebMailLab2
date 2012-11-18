@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Entidades;
 
 namespace Persistencia
@@ -9,12 +6,12 @@ namespace Persistencia
     public interface IPersistenciaEmails
     {
         void NuevoEmail (Email e);
-        List<Email> ListarEmails(int numeroCarpeta);
-        void EliminarEmail(int NumeroEmail, int numCarpeta);
-        Email GetEmail(int numeroEmail);
-        void MarcarEmailLeido(int NumeroEmail, int numeroCarpeta);
-        void MoverEmail(int NumeroEmail, int numCarpetaActual, int numCarpetaDestino);
-        List<Email> ListarEmailsEnviados(int numeroCarpeta);
-        List<Email> ListarEmailsRecibidos(int numeroCarpeta);
+        List<Email> ListarEmails(Carpeta carpeta);
+        void EliminarEmail(Email e, Carpeta c);
+        Email GetEmail(Email e);
+        void MarcarEmailLeido(Email e, Carpeta c);
+        void MoverEmail(Email e, Carpeta carpetaActual, Carpeta carpetaDestino);
+        List<Email> ListarEmailsEnviados(Carpeta c);
+        List<Email> ListarEmailsRecibidos(Carpeta c);
     }
 }

@@ -33,7 +33,9 @@ namespace BiosWebMail
                 if (e.CommandName.ToUpper() == "DESACTIVAR")
                 {
                     ILogicaUsuario lu = FabricaLogica.getLogicaUsuario();
-                    lu.ActualizarStatusAlumno(Convert.ToInt32(e.CommandArgument), false);
+                    Alumno a = new Alumno();
+                    a.CI = Convert.ToInt32(e.CommandArgument);
+                    lu.ActualizarStatusAlumno(a, false);
                     lblInfo.Text = "Alumno desactivado";
                 }
             }

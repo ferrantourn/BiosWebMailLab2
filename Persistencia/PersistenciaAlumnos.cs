@@ -317,6 +317,7 @@ namespace Persistencia
                 if (u != null && !u.ACTIVO)
                 {
                     throw new ErrorAlumnoBloqueado();
+                   
                 }
             }
             catch (ErrorAlumnoBloqueado ex)
@@ -461,18 +462,17 @@ namespace Persistencia
         }
 
 
-        /// <summary>
+       /// <summary>
         /// ACTUALIZA EL STATUS DE ACTIVO DE UN ALUMNO 
-        /// </summary>
-        /// <param name="ci">Esta de cedula del alumno</param>
-        /// <param name="SetActiveStatus"></param>
-        public void ActualizarStatusAlumno(int ci, bool SetActiveStatus)
+       /// </summary>
+       /// <param name="a"></param>
+        public void ActualizarStatusAlumno(Alumno a)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spActualiarStatusAlumno", conexion, CommandType.StoredProcedure);
 
-            SqlParameter _ci = new SqlParameter("@ci", ci);
-            SqlParameter _statusAlumno = new SqlParameter("@SetStatus", SetActiveStatus);
+            SqlParameter _ci = new SqlParameter("@ci", a.CI);
+            SqlParameter _statusAlumno = new SqlParameter("@SetStatus", a.ACTIVO);
             SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
             _retorno.Direction = ParameterDirection.ReturnValue;
 

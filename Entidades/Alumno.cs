@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System;
 
 namespace Entidades
 {
@@ -32,11 +30,18 @@ namespace Entidades
         {
         }
 
-        public Alumno(List<Carpeta> listaCarpetas, string foto, bool Activo)
+        public Alumno(List<Carpeta> listaCarpetas, string foto, bool activo, int ci, string nombreUsuario, string nombre,
+            string apellido, string pass)
+            : base(ci, nombreUsuario, nombre, apellido, pass)
         {
             LISTA_CARPETAS = listaCarpetas;
             FOTO = foto;
-            ACTIVO = Activo;
+            ACTIVO = activo;
+            CI = ci;
+            NOMBRE_USUARIO = nombreUsuario;
+            NOMBRE = nombre;
+            APELLIDO = apellido;
+            PASS = pass;
         }
     }
 }

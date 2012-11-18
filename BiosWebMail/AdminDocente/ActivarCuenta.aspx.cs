@@ -68,7 +68,9 @@ namespace BiosWebMail
                 int ci;
                 if (Int32.TryParse(txtDocumento.Text, out ci))
                 {
-                    lu.ActualizarStatusAlumno(ci, true);
+                    Alumno a = new Alumno();
+                    a.CI = ci;
+                    lu.ActualizarStatusAlumno(a, true);
                     lblInfo.Text = "Alumno activado!";
                 }
             }

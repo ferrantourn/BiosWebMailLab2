@@ -31,7 +31,11 @@ namespace BiosWebMail
                         btnAceptar.Visible = false;
                         ILogicaEmails le = FabricaLogica.getLogicaEmails();
 
-                        Entidades.Email email = le.GetEmail(emailId);
+                        //Entidades.Email email = le.GetEmail(emailId);
+
+                        Entidades.Email email = new Entidades.Email {NUMERO_EMAIL = emailId};
+                        email = le.GetEmail(email);
+
                         if (email != null)
                         {
                             Header.HEADER_TEXT = "Email enviado " + email.FECHA.ToShortDateString() + " a las " +
@@ -47,7 +51,7 @@ namespace BiosWebMail
                             //bindeamos las posibles carpetas de destino
                             // a mover
                             ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
-                            ddlFolders.DataSource = lc.ListarCarpetas((Alumno) Session["Usuario"]);
+                            ddlFolders.DataSource = lc.ListarCarpetas((Alumno)Session["Usuario"]);
                             ddlFolders.DataBind();
                             lblMover.Visible = true;
                             ddlFolders.Visible = true;
@@ -76,12 +80,21 @@ namespace BiosWebMail
             try
             {
                 ILogicaEmails le = FabricaLogica.getLogicaEmails();
-                SiteAlumno m = (SiteAlumno)Master;
+                SiteAlumno m = Master;
                 if (m != null && m.USUARIO_LOGUEADO != null)
                 {
-                    Alumno a = (Alumno)m.USUARIO_LOGUEADO;
+                    Alumno a = m.USUARIO_LOGUEADO;
 
-                    le.AgregarEmail(txtAsunto.Text, txtContenido.Text, a, txtPara.Text);
+                    Entidades.Email newEmail = new Entidades.Email
+                                                   {
+                                                       CUERPO = txtContenido.Text,
+                                                       FECHA = DateTime.Now,
+                                                       ASUNTO = txtAsunto.Text
+                                                   };
+                    Alumno destinatario = new Alumno {NOMBRE_USUARIO = txtPara.Text};
+
+                    //le.AgregarEmail(txtAsunto.Text, txtContenido.Text, a, txtPara.Text);
+                    le.AgregarEmail(newEmail, a, destinatario);
                     Response.Redirect("~/AdminAlumno/home.aspx");
                 }
             }
@@ -99,7 +112,14 @@ namespace BiosWebMail
                 Carpeta current = (Carpeta)Session["Carpeta"];
                 if (current != null)
                 {
-                    le.MoverEmail(Convert.ToInt32(Session["EmailId"]), current.NUMERO_CARPETA, Convert.ToInt32(ddlFolders.SelectedValue));
+                    //le.MoverEmail(Convert.ToInt32(Session["EmailId"]), current.NUMERO_CARPETA, Convert.ToInt32(ddlFolders.SelectedValue));
+
+                    Entidades.Email email = new Entidades.Email();
+                    email.NUMERO_EMAIL = Convert.ToInt32(Session["EmailId"]);
+                    Carpeta cdestino = new Carpeta();
+                    cdestino.NUMERO_CARPETA = Convert.ToInt32(ddlFolders.SelectedValue);
+                    le.MoverEmail(email, current, cdestino);
+
                     lblInfo.Text = "El email se movio a la carpeta " + ddlFolders.SelectedItem.Text;
                 }
 

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Entidades;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using Entidades;
 using ExcepcionesPersonalizadas;
 
 namespace Persistencia
@@ -76,12 +73,12 @@ namespace Persistencia
         /// ELIMINA UNA CARPETA DEL SISTEMA
         /// </summary>
         /// <param name="numeroCarpeta"></param>
-        public void EliminarCarpeta(int numeroCarpeta)
+        public void EliminarCarpeta(Carpeta c)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spEliminarCarpeta", conexion, CommandType.StoredProcedure);
 
-            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", numeroCarpeta);
+            SqlParameter _numeroCarpeta = new SqlParameter("@NumeroCarpeta", c.NUMERO_CARPETA);
 
             SqlParameter _Retorno = new SqlParameter("@Retorno", SqlDbType.Int);
             _Retorno.Direction = ParameterDirection.ReturnValue;
@@ -108,25 +105,28 @@ namespace Persistencia
 
 
 
+        
+        //public Carpeta BuscarCarpetaSistemaAlumno(int ciAlumno, string nombreCarpetaSistema)
         /// <summary>
         /// DADO EL USUARIO OBTIENE LA CARPETA DEL sistema pedida
         /// </summary>
-        /// <param name="ciAlumno"></param>
-        /// <param name="nombreCarpetaSistema"></param>
+        /// <param name="carpeta"></param>
         /// <returns></returns>
-        public Carpeta BuscarCarpetaSistemaAlumno(int ciAlumno, string nombreCarpetaSistema)
+        public Carpeta BuscarCarpetaSistemaAlumno(Carpeta carpeta)
+
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spBuscarCarpetaSistema", conexion, CommandType.StoredProcedure);
-            SqlParameter _ci = new SqlParameter("@Ci", ciAlumno);
-            SqlParameter _carpetaSistema = new SqlParameter("@nombreCarpetaSistema", nombreCarpetaSistema);
+            SqlParameter _ci = new SqlParameter("@Ci", carpeta.USUARIO.CI);
+            SqlParameter _carpetaSistema = new SqlParameter("@nombreCarpetaSistema", carpeta.NOMBRE_CARPETA);
             cmd.Parameters.Add(_ci);
             cmd.Parameters.Add(_carpetaSistema);
 
             SqlDataReader reader;
             Carpeta c = null;
             int _numCarpeta;
-            Usuario _usuario;
+            //Usuario _usuario;
+            Alumno _usuario;
             try
             {
                 conexion.Open();
@@ -134,8 +134,10 @@ namespace Persistencia
                 if (reader.Read())
                 {
                     _numCarpeta = (int)reader["NumeroCarpeta"];
-                    _usuario = new Usuario(ciAlumno, "", "", "", "");
-                    c = new Carpeta(_usuario, _numCarpeta, nombreCarpetaSistema);
+                    //_usuario = new Usuario(ciAlumno, "", "", "", "");
+                    _usuario = new Alumno { CI = carpeta.USUARIO.CI};
+
+                    c = new Carpeta(_usuario, _numCarpeta, carpeta.NOMBRE_CARPETA);
                 }
                 reader.Close();
             }
@@ -158,18 +160,19 @@ namespace Persistencia
         /// <param name="ciAlumno"></param>
         /// <param name="numCarpeta"></param>
         /// <returns></returns>
-        public Carpeta BuscarCarpetaAlumno(int ciAlumno, int numCarpeta)
+        public Carpeta BuscarCarpetaAlumno(Carpeta carpeta)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spBuscarCarpeta", conexion, CommandType.StoredProcedure);
-            SqlParameter _ci = new SqlParameter("@Ci", ciAlumno);
-            SqlParameter _numCarpeta = new SqlParameter("@numCarpeta", numCarpeta);
+            SqlParameter _ci = new SqlParameter("@Ci", carpeta.USUARIO.CI);
+            SqlParameter _numCarpeta = new SqlParameter("@numCarpeta", carpeta.NUMERO_CARPETA);
             cmd.Parameters.Add(_ci);
             cmd.Parameters.Add(_numCarpeta);
 
             SqlDataReader reader;
             Carpeta c = null;
-            Usuario _usuario;
+            //Usuario _usuario;
+            Alumno _usuario;
             string _nomCarpeta;
             try
             {
@@ -178,8 +181,9 @@ namespace Persistencia
                 if (reader.Read())
                 {
                     _nomCarpeta = (string)reader["NombreCarpeta"];
-                    _usuario = new Usuario(ciAlumno, "", "", "", "");
-                    c = new Carpeta(_usuario, numCarpeta, _nomCarpeta);
+                    //_usuario = new Usuario(ciAlumno, "", "", "", "");
+                    _usuario = new Alumno { CI = carpeta.USUARIO.CI };
+                    c = new Carpeta(_usuario, carpeta.NUMERO_CARPETA, _nomCarpeta);
                 }
                 reader.Close();
             }
@@ -200,11 +204,11 @@ namespace Persistencia
         /// </summary>
         /// <param name="ciAlumno"></param>
         /// <returns></returns>
-        public List<Carpeta> ListarCarpetasAlumno(int ciAlumno)
+        public List<Carpeta> ListarCarpetasAlumno(Alumno a)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spListarCarpetasUsuario", conexion, CommandType.StoredProcedure);
-            SqlParameter _ci = new SqlParameter("@Ci", ciAlumno);
+            SqlParameter _ci = new SqlParameter("@Ci", a.CI);
 
 
             cmd.Parameters.Add(_ci);
@@ -212,7 +216,8 @@ namespace Persistencia
             SqlDataReader reader;
             Carpeta c = null;
             List<Carpeta> carpetas = new List<Carpeta>();
-            Usuario _usuario;
+            //Usuario _usuario;
+            Alumno _usuario;
             string _nomCarpeta;
             int _numCarpeta;
             try
@@ -223,10 +228,11 @@ namespace Persistencia
                 {
                     _numCarpeta = (int)reader["NumeroCarpeta"];
                     _nomCarpeta = (string)reader["NombreCarpeta"];
-                    _usuario = new Usuario(ciAlumno, "", "", "", "");
-
-                    int _totalEmails = ContarMailsCarpeta(_numCarpeta);
-                    int _totalEmalsUnRead = ContarMailsCarpetaSinLeer(_numCarpeta);
+                    //_usuario = new Usuario(ciAlumno, "", "", "", "");
+                    _usuario = new Alumno {CI = a.CI};
+                    c.NUMERO_CARPETA = _numCarpeta;
+                    int _totalEmails = ContarMailsCarpeta(c);
+                    int _totalEmalsUnRead = ContarMailsCarpetaSinLeer(c);
 
                     c = new Carpeta(_usuario, _numCarpeta, _nomCarpeta, _totalEmails, _totalEmalsUnRead);
 
@@ -252,11 +258,11 @@ namespace Persistencia
         /// </summary>
         /// <param name="numCarpeta"></param>
         /// <returns></returns>
-        internal int ContarMailsCarpeta(int numCarpeta)
+        internal int ContarMailsCarpeta(Carpeta c)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spContarMailsCarpeta", conexion, CommandType.StoredProcedure);
-            SqlParameter _ci = new SqlParameter("@numCarpeta", numCarpeta);
+            SqlParameter _ci = new SqlParameter("@numCarpeta", c.NUMERO_CARPETA);
             SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
             _retorno.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(_ci);
@@ -290,11 +296,11 @@ namespace Persistencia
         /// </summary>
         /// <param name="numCarpeta"></param>
         /// <returns></returns>
-        internal int ContarMailsCarpetaSinLeer(int numCarpeta)
+        internal int ContarMailsCarpetaSinLeer(Carpeta c)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spContarMailsSinLeer", conexion, CommandType.StoredProcedure);
-            SqlParameter _ci = new SqlParameter("@numCarpeta", numCarpeta);
+            SqlParameter _ci = new SqlParameter("@numCarpeta", c.NUMERO_CARPETA);
             SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
             _retorno.Direction = ParameterDirection.ReturnValue;
             cmd.Parameters.Add(_ci);

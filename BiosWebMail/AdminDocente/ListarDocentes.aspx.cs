@@ -39,7 +39,8 @@ namespace BiosWebMail
                 if (e.CommandName.ToUpper() == "EDITAR")
                 {
                     ILogicaUsuario lu = FabricaLogica.getLogicaUsuario();
-                    Docente d = lu.getDocente(Convert.ToString(e.CommandArgument));
+                    Docente d = new Docente { NOMBRE_USUARIO = Convert.ToString(e.CommandArgument) };
+                    d = lu.getDocente(d);
                     if (d != null)
                     {
                         if (Session["EditarUsuario"] == null)

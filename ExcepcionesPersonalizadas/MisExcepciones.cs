@@ -1,180 +1,163 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ExcepcionesPersonalizadas
+{
+    public class MisExcepciones : Exception
     {
-        public class MisExcepciones : System.Exception
-        {
 
+    }
+
+    public class ErrorAlumnoNoExiste : Exception
+    {
+        private const string Mensaje = "ERROR: Alumno no existe";
+
+        public override string Message
+        {
+            get { return Mensaje; }
         }
 
-        public class ErrorAlumnoNoExiste : System.Exception
-        {
-            public ErrorAlumnoNoExiste()
-            {
-            }
+    }
 
-            public override string ToString()
-            {
-                return "ERROR: Alumno no existe";
-            }
- 
+    public class ErrorAlumnoBloqueado : Exception
+    {
+        private const string Mensaje = "ERROR: Alumno esta bloqueado";
+
+        public override string Message
+        {
+            get { return Mensaje; }
+        }
+    }
+
+    public class ErrorUsuarioContraseñaIncorrecto : Exception
+    {
+        private const string Mensaje = "ERROR: verifica los datos ingresados. media pila!";
+
+        public override string Message
+        {
+            get { return Mensaje; }
+        }
+    }
+    public class ErrorContraseñaIncorrecta : Exception
+    {
+        private const string Mensaje = "ERROR: verifique contraseña actual";
+
+        public override string Message
+        {
+            get { return Mensaje; }
         }
 
-        public class ErrorAlumnoBloqueado : System.Exception
+       
+    }
+    public class ErrorEjecucionSP : Exception
+    {
+
+        private const string Mensaje = "Hubo un error al intentar ejecutar la petición, vuelva a intentarlo más tarde";
+
+        public override string Message
         {
-            public ErrorAlumnoBloqueado()
-            {
-            }
-
-            public override string ToString()
-            {
-                return "ERROR: Alumno esta bloqueado";
-            }
-
+            get { return Mensaje; }
         }
+        
+    }
 
-        public class ErrorUsuarioContraseñaIncorrecto : System.Exception
+    public class ErrorGeneral : Exception
+    {
+
+        private const string Mensaje = "Hubo un error general, vuelva a intentarlo más tarde";
+
+        public override string Message
         {
-            public ErrorUsuarioContraseñaIncorrecto()
-            {
-            }
-
-            public override string ToString()
-            {
-                return "ERROR: verifica los datos ingresados. media pila!";
-            }
+            get { return Mensaje; }
         }
-        public class ErrorContraseñaIncorrecta : System.Exception
+     
+    }
+
+    public class ErrorBaseDeDatos : Exception
+    {
+
+        private const string Mensaje = "Hubo un error en la base de datos, vuelva a intentarlo más tarde";
+
+        public override string Message
         {
-            public ErrorContraseñaIncorrecta()
-            {
-            }
-
-            public override string ToString()
-            {
-                return "ERROR: verifique contraseña actual";
-            }
+            get { return Mensaje; }
         }
-        public class ErrorEjecucionSP : System.Exception
+       
+    }
+
+    public class ErrorDocumentoInvalido : Exception
+    {
+        private const string Mensaje = "Escriba la CI sin puntos ni guiones";
+
+        public override string Message
         {
-            public ErrorEjecucionSP()
-            {
-
-            }
-
-            public override string ToString()
-            {
-                return "Hubo un error al intentar ejecutar la petición, vuelva a intentarlo más tarde";
-            }
+            get { return Mensaje; }
         }
+       
+    }
 
-        public class ErrorGeneral : System.Exception
+    public class ErrorUsuarioYaExiste : Exception
+    {
+        private const string Mensaje = "ERROR: Usuario ya existe en el sistema";
+
+        public override string Message
         {
-            public ErrorGeneral()
-            {
-
-            }
-            public override string ToString()
-            {
-                return "Hubo un error general, vuelva a intentarlo más tarde";
-            }
+            get { return Mensaje; }
         }
+      
+    }
 
-        public class ErrorBaseDeDatos : System.Exception
+    public class ErrorUsuarioNoExiste : Exception
+    {
+        private const string Mensaje = "ERROR: Usuario no existe en el sistema";
+
+        public override string Message
         {
-            public ErrorBaseDeDatos()
-            {
-
-            }
-            public override string ToString()
-            {
-                return "Hubo un error en la base de datos, vuelva a intentarlo más tarde";
-            }
+            get { return Mensaje; }
         }
+      
+    }
+    public class ErrorNoHayUsuarios : Exception
+    {
+        private const string Mensaje = "ERROR: No hay usuarios registrados en el sistema";
 
-        public class ErrorDocumentoInvalido : System.Exception
+        public override string Message
         {
-            public ErrorDocumentoInvalido()
-            {
-
-            }
-            public override string ToString()
-            {
-                return "Escriba la CI sin puntos ni guiones";
-            }
+            get { return Mensaje; }
         }
+      
+    }
 
-        public class ErrorUsuarioYaExiste : System.Exception
+    public class ErrorCarpetaYaExiste : Exception
+    {
+        private const string Mensaje = "ERROR: Ya existe una carpeta con el mismo nombre.";
+
+        public override string Message
         {
-            public ErrorUsuarioYaExiste()
-            {
-            }
-            public override string ToString()
-            {
-                return "ERROR: Usuario ya existe en el sistema";
-            }
+            get { return Mensaje; }
         }
+       
+    }
 
-        public class ErrorUsuarioNoExiste : System.Exception
+    public class ErrorNoHayMails : Exception
+    {
+        private const string Mensaje = "Carpeta está vacía - No hay ningún mail en esta carpeta.";
+
+        public override string Message
         {
-            public ErrorUsuarioNoExiste()
-            {
-
-            }
-            public override string ToString()
-            {
-                return "ERROR: Usuario no existe en el sistema";
-            }
+            get { return Mensaje; }
         }
-        public class ErrorNoHayUsuarios : System.Exception
+       
+    }
+
+    public class ErrorEnvioEmail : Exception
+    {
+        private const string Mensaje = "Error al enviar email.";
+
+        public override string Message
         {
-            public ErrorNoHayUsuarios()
-            {
-
-            }
-            public override string ToString()
-            {
-                return "ERROR: No hay usuarios registrados en el sistema";
-            }
+            get { return Mensaje; }
         }
-
-        public class ErrorCarpetaYaExiste : System.Exception
-        {
-            public ErrorCarpetaYaExiste()
-            {
-
-            }
-            public override string ToString()
-            {
-                return "ERROR: Ya existe una carpeta con el mismo nombre.";
-            }
-        }
-
-        public class ErrorNoHayMails : System.Exception
-        {
-            public ErrorNoHayMails()
-            {
-
-            }
-            public override string ToString()
-            {
-                return "Carpeta está vacía - No hay ningún mail en esta carpeta.";
-            }
-        }
-
-        public class ErrorEnvioEmail : System.Exception
-        {
-            public ErrorEnvioEmail()
-            {
-
-            }
-            public override string ToString()
-            {
-                return "Error al enviar email.";
-            }
-        }
+     
+    }
 }
 

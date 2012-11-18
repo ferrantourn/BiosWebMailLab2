@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Entidades;
 
 namespace Persistencia
@@ -9,9 +6,9 @@ namespace Persistencia
     public interface    IPersistenciaCarpetas
     {
         void NuevaCarpeta(Carpeta c);
-        Carpeta BuscarCarpetaSistemaAlumno (int ciAlumno, string nombreCarpetaSistema);
-        Carpeta BuscarCarpetaAlumno(int ciAlumno, int numCarpeta);
-        List<Carpeta> ListarCarpetasAlumno(int ciAlumno);
-        void EliminarCarpeta(int numeroCarpeta);
+        Carpeta BuscarCarpetaSistemaAlumno(Carpeta carpeta);
+        Carpeta BuscarCarpetaAlumno(Carpeta c);
+        List<Carpeta> ListarCarpetasAlumno(Alumno a);
+        void EliminarCarpeta(Carpeta c);
     }
 }

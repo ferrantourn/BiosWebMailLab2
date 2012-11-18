@@ -25,6 +25,17 @@ namespace Entidades
             MATERIAS = materias;
         }
 
+        public Docente(List<string> materias, int ci, string nombreUsuario, string nombre,
+            string apellido, string pass)
+            : base(ci, nombreUsuario, nombre, apellido, pass)
+        {
+            MATERIAS = materias;
+            CI = ci;
+            NOMBRE_USUARIO = nombreUsuario;
+            NOMBRE = nombre;
+            APELLIDO = apellido;
+            PASS = pass;
+        }
 
         public string MateriasToString()
         {

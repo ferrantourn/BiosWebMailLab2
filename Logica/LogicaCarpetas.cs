@@ -51,7 +51,7 @@ namespace Logica
             try
             {
                 IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
-                return pc.ListarCarpetasAlumno(a.CI);
+                return pc.ListarCarpetasAlumno(a);
             }
             catch (Exception ex)
             {
@@ -61,12 +61,13 @@ namespace Logica
 
         }
 
-        public void EliminarCarpeta(int numeroCarpeta)
+        //public void EliminarCarpeta(int numeroCarpeta)
+        public void EliminarCarpeta (Carpeta c)
         {
             try
             {
                 IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
-                pc.EliminarCarpeta(numeroCarpeta);
+                pc.EliminarCarpeta(c);
             }
             catch (Exception ex)
             {
@@ -79,12 +80,14 @@ namespace Logica
 
 
 
-        public Carpeta getInboxFolder(int ciAlumno)
+        //public Carpeta getInboxFolder(int ciAlumno)
+        public Carpeta getInboxFolder(Alumno a)
         {
             try
             {
                 IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
-                return pc.BuscarCarpetaSistemaAlumno(ciAlumno, "Inbox");
+                Carpeta c = new Carpeta {USUARIO = a, NOMBRE_CARPETA = "Inbox"};
+                return pc.BuscarCarpetaSistemaAlumno(c);
             }
             catch (Exception ex)
             {
@@ -94,12 +97,14 @@ namespace Logica
 
         }
 
-        public Carpeta getSentFolder(int ciAlumno)
+        //public Carpeta getSentFolder(int ciAlumno)
+        public Carpeta getSentFolder(Alumno a)
         {
             try
             {
                 IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
-                return pc.BuscarCarpetaSistemaAlumno(ciAlumno, "Enviados");
+                Carpeta c = new Carpeta { USUARIO = a, NOMBRE_CARPETA = "Enviados" };
+                return pc.BuscarCarpetaSistemaAlumno(c);
             }
             catch (Exception ex)
             {
@@ -126,12 +131,13 @@ namespace Logica
         }
 
 
-        public Carpeta GetCarpeta(int numCarpeta, int ci)
+        //public Carpeta GetCarpeta(int numCarpeta, int ci)
+        public Carpeta GetCarpeta(Carpeta c)
         {
             try
             {
                 IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
-                return pc.BuscarCarpetaAlumno(ci, numCarpeta);
+                return pc.BuscarCarpetaAlumno(c);
             }
             catch (Exception ex)
             {

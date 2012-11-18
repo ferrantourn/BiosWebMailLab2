@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Logica;
 using Entidades;
+using Logica;
 
 namespace BiosWebMail.UserControls
 {
@@ -57,13 +54,19 @@ namespace BiosWebMail.UserControls
                     }
                     //MARCAR EMAIL COMO LEIDO
                     //-----------------------
-                    le.MarcarEmailLeido(Convert.ToInt32(e.CommandArgument), CARPETA.NUMERO_CARPETA);
+                    //le.MarcarEmailLeido(Convert.ToInt32(e.CommandArgument), CARPETA.NUMERO_CARPETA);
+                    Entidades.Email email = new Entidades.Email {NUMERO_EMAIL = Convert.ToInt32(e.CommandArgument)};
+                    le.MarcarEmailLeido(email, CARPETA);
+
 
                     Response.Redirect("~/AdminAlumno/Email.aspx", false);
                 }
                 else if (e.CommandName.ToUpper() == "ELIMINAR")
                 {
-                    le.EliminarEmail(Convert.ToInt32(e.CommandArgument), CARPETA.NUMERO_CARPETA, ((Alumno)Session["Usuario"]).CI);
+                    //le.EliminarEmail(Convert.ToInt32(e.CommandArgument), CARPETA.NUMERO_CARPETA, ((Alumno)Session["Usuario"]).CI);
+                    Entidades.Email email = new Entidades.Email {NUMERO_EMAIL = Convert.ToInt32(e.CommandArgument)};
+                    CARPETA.USUARIO = ((Alumno)Session["Usuario"]);
+                    le.EliminarEmail(email, CARPETA);
                     lblInfo.Text = "Email eliminado";
                 }
             }
@@ -85,10 +88,9 @@ namespace BiosWebMail.UserControls
                 //CARGA LOS EMAILS EN FUNCION DE LA PROPIEDAD CODIGO_CARPETA
                 //----------------------------------------------------------
                 ILogicaEmails le = FabricaLogica.getLogicaEmails();
-                EmailListRepeater.DataSource = le.ListarEmail(CARPETA.NUMERO_CARPETA,((Alumno)Session["Usuario"]).CI);
+                CARPETA.USUARIO = ((Alumno)Session["Usuario"]);
+                EmailListRepeater.DataSource = le.ListarEmail(CARPETA);
                 EmailListRepeater.DataBind();
-
-
             }
             catch (Exception ex)
             {

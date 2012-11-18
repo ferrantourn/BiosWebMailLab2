@@ -12,8 +12,8 @@ namespace Entidades
         /// <summary>
         /// usuario dueño de la carpeta
         /// </summary>
-        private Usuario _usuario;
-        public Usuario USUARIO
+        private Alumno _usuario;
+        public Alumno USUARIO
         {
             get { return _usuario; }
             set { _usuario = value; }
@@ -65,7 +65,7 @@ namespace Entidades
 
         }
 
-        public Carpeta(Usuario usuario, int numeroCarpeta, string nombreCarpeta, List<Email> listaEmail)
+        public Carpeta(Alumno usuario, int numeroCarpeta, string nombreCarpeta, List<Email> listaEmail)
         {
             USUARIO = usuario;
             NUMERO_CARPETA = numeroCarpeta;
@@ -73,14 +73,14 @@ namespace Entidades
             LISTA_EMAIL = listaEmail;
         }
 
-        public Carpeta(Usuario usuario, int numeroCarpeta, string nombreCarpeta)
+        public Carpeta(Alumno usuario, int numeroCarpeta, string nombreCarpeta)
         {
             USUARIO = usuario;
             NUMERO_CARPETA = numeroCarpeta;
             NOMBRE_CARPETA = nombreCarpeta;
         }
 
-        public Carpeta(Usuario usuario, int numeroCarpeta, string nombreCarpeta, int totalEmails, int totalNoLeidos)
+        public Carpeta(Alumno usuario, int numeroCarpeta, string nombreCarpeta, int totalEmails, int totalNoLeidos)
         {
             USUARIO = usuario;
             NUMERO_CARPETA = numeroCarpeta;

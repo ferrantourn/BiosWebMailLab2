@@ -18,7 +18,7 @@ namespace BiosWebMail
 
                 lblInfo.Text = "";
                 Session["EmailId"] = null;
-                   
+
                 if (!IsPostBack)
                 {
                     //CARGAMOS NOMBRE DE USUARIO LOGUEADO
@@ -34,7 +34,9 @@ namespace BiosWebMail
                     SiteAlumno master = (SiteAlumno)Master;
                     if (master != null && master.USUARIO_LOGUEADO != null)
                     {
-                        Carpeta inbox = lc.getInboxFolder(master.USUARIO_LOGUEADO.CI);
+                        //Carpeta inbox = lc.getInboxFolder(master.USUARIO_LOGUEADO.CI);
+                        Carpeta inbox = lc.getInboxFolder(master.USUARIO_LOGUEADO);
+
                         if (inbox != null)
                             ConsultaCarpeta.CARPETA = inbox;
                     }
@@ -108,8 +110,14 @@ namespace BiosWebMail
                 {
                     //TRAEMOS TODOS LOS EMAILS DE ESA CARPETA
                     //---------------------------------------
-                    Carpeta currentFolder = lc.GetCarpeta(Convert.ToInt32(e.CommandArgument),
-                                                          ((Alumno) Session["Usuario"]).CI);
+                    //Carpeta currentFolder = lc.GetCarpeta(Convert.ToInt32(e.CommandArgument),((Alumno) Session["Usuario"]).CI);
+                    Carpeta c = new Carpeta
+                                    {
+                                        NUMERO_CARPETA = Convert.ToInt32(e.CommandArgument),
+                                        USUARIO = ((Alumno) Session["Usuario"])
+                                    };
+                    Carpeta currentFolder = lc.GetCarpeta(c);
+
                     ConsultaCarpeta.CARPETA = currentFolder;
                 }
                 else if (e.CommandName.ToUpper() == "ELIMINAR")
@@ -117,7 +125,11 @@ namespace BiosWebMail
 
                     //ELIMINAMOS LA CARPETA SELECCIONADA
                     //----------------------------------
-                    lc.EliminarCarpeta(Convert.ToInt32(e.CommandArgument));
+                    Carpeta c = new Carpeta();
+                    c.NUMERO_CARPETA = Convert.ToInt32(e.CommandArgument);
+                    //lc.EliminarCarpeta(Convert.ToInt32(e.CommandArgument));
+                    lc.EliminarCarpeta(c);
+
                     lblInfo.Text = "Carpeta Eliminada";
                     RefreshFolders();
                 }

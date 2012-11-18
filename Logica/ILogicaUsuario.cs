@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Entidades;
 
 namespace Logica
 {
     public interface ILogicaUsuario
     {
-        Alumno getAlumno(string userName);
+        Alumno getAlumno(Alumno a);
         Alumno getAlumno(int ci);
-        Docente getDocente(string userName);
+        Docente getDocente(Docente d);
         void NuevoAlumno(Alumno a);
         void NuevoDocente(Docente d);
         Usuario getLoginUsuario(string userName, string pass);
@@ -18,11 +15,11 @@ namespace Logica
         List<Docente> ListarDocentes();
         List<Alumno> ListarAlumnos();
         /// <summary>
-        /// ACTUALIZA EL STATUS DE ACTIVO/NOACTIVO DE UN ALUMNO 
+        /// ACTUALIZA EL STATUS DE ACTIVO/NOACTIVO DE UN ALUMNO
         /// </summary>
-        /// <param name="ci">Esta de cedula del alumno</param>
+        /// <param name="a"></param>
         /// <param name="SetActiveStatus"></param>
-        void ActualizarStatusAlumno(int ci, bool SetActiveStatus);
+        void ActualizarStatusAlumno(Alumno a, bool setActiveStatus);
 
 
         /// <summary>
