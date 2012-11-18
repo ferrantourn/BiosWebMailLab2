@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Services;
 using Entidades;
 using Logica;
@@ -33,7 +30,7 @@ namespace WebMailWS
         }
 
         [WebMethod]
-        public List<Carpeta> ListarCarpetas(Alumno a)
+        public List<Carpeta> ListarCarpetas (Alumno a)
         {
             ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
             return lc.ListarCarpetas(a);
@@ -72,11 +69,125 @@ namespace WebMailWS
 
 
         #region WEB METHODS DE EMAILS
-        //OTRO CAMBIOS
+
+        public void AgregarEmail(Email newEmail, Alumno remitente, Alumno destinatario)
+        {
+            ILogicaEmails le = FabricaLogica.getLogicaEmails();
+            le.AgregarEmail(newEmail,remitente,destinatario);
+        }
+
+        [WebMethod]
+        public List<Email> ListarEmail(Carpeta c)
+        {
+            ILogicaEmails le = FabricaLogica.getLogicaEmails();
+            return le.ListarEmail(c);
+        }
+
+        [WebMethod]
+        public Email GetEmail(Email e)
+        {
+            ILogicaEmails le = FabricaLogica.getLogicaEmails();
+            return le.GetEmail(e);
+        }
+
+        [WebMethod]
+        public void EliminarEmail(Email e, Carpeta carpeta)
+        {
+            ILogicaEmails le = FabricaLogica.getLogicaEmails();
+            le.EliminarEmail(e, carpeta);
+        }
+
+        [WebMethod]
+        public void MarcarEmailLeido(Email e, Carpeta c)
+        {
+            ILogicaEmails le = FabricaLogica.getLogicaEmails();
+            le.MarcarEmailLeido(e, c);
+        }
+
+        [WebMethod]
+        public void MoverEmail(Email e, Carpeta carpetaActual, Carpeta carpetaDestino)
+        {
+            ILogicaEmails le = FabricaLogica.getLogicaEmails();
+            le.MoverEmail(e, carpetaActual, carpetaDestino);
+        }
+
         #endregion
 
 
         #region WEB METHODS DE USUARIO
+
+        public Alumno getAlumno(Alumno a)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            return le.getAlumno(a);
+        }
+
+        public Alumno getAlumno(int ci)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            return le.getAlumno(ci);
+        }
+
+        public Docente getDocente(Docente d)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            return le.getDocente(d);
+        }
+
+        public void NuevoAlumno(Alumno a)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            le.NuevoAlumno(a);
+        }
+
+        public void NuevoDocente(Docente d)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            le.NuevoDocente(d);
+        }
+
+        public Usuario getLoginUsuario(string userName, string pass)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            return le.getLoginUsuario(userName, pass);
+        }
+
+        public List<Alumno> ListarAlumnosSinMovimientos(int NumeroDias)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            return le.ListarAlumnosSinMovimientos(NumeroDias);
+        }
+
+        public List<Docente> ListarDocentes()
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            return le.ListarDocentes();
+        }
+
+        public List<Alumno> ListarAlumnos()
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            return le.ListarAlumnos();
+        }
+
+        public void ActualizarStatusAlumno(Alumno a, bool setActiveStatus)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            le.ActualizarStatusAlumno(a, setActiveStatus);
+        }
+
+        public void ModificarAlumno(Alumno a)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            le.ModificarAlumno(a);
+        }
+
+        public void ModificarDocente(Docente d)
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            le.ModificarDocente(d);
+        }
+
 
         #endregion
     }
