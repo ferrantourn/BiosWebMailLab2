@@ -43,6 +43,7 @@ local.properties
 
 ##TAMBIEN IGNORA ESTAS EXTENSIONES DE ARCHIVOS DE CONFIGURACION
 *.settings
+*.config
 App.config
 
 # Build results
