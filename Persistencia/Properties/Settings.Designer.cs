@@ -26,7 +26,7 @@ namespace Persistencia.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=FERRAN-PC\\SQL2008R2; Initial Catalog = ObligatorioApp1; Integrated Se" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.; Initial Catalog = ObligatorioApp1; Integrated Se" +
             "curity = true")]
         public string PersistenciaConnString {
             get {
