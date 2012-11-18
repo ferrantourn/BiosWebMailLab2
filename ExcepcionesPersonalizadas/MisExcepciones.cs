@@ -2,11 +2,13 @@
 
 namespace ExcepcionesPersonalizadas
 {
+    [Serializable]
     public class MisExcepciones : Exception
     {
 
     }
 
+    [Serializable]
     public class ErrorAlumnoNoExiste : Exception
     {
         private const string Mensaje = "ERROR: Alumno no existe";
@@ -18,6 +20,7 @@ namespace ExcepcionesPersonalizadas
 
     }
 
+    [Serializable]
     public class ErrorAlumnoBloqueado : Exception
     {
         private const string Mensaje = "ERROR: Alumno esta bloqueado";
@@ -28,6 +31,7 @@ namespace ExcepcionesPersonalizadas
         }
     }
 
+    [Serializable]
     public class ErrorUsuarioContraseñaIncorrecto : Exception
     {
         private const string Mensaje = "ERROR: verifica los datos ingresados. media pila!";
@@ -37,6 +41,8 @@ namespace ExcepcionesPersonalizadas
             get { return Mensaje; }
         }
     }
+
+    [Serializable]
     public class ErrorContraseñaIncorrecta : Exception
     {
         private const string Mensaje = "ERROR: verifique contraseña actual";
@@ -48,6 +54,8 @@ namespace ExcepcionesPersonalizadas
 
        
     }
+
+    [Serializable]
     public class ErrorEjecucionSP : Exception
     {
 
@@ -60,6 +68,7 @@ namespace ExcepcionesPersonalizadas
         
     }
 
+    [Serializable]
     public class ErrorGeneral : Exception
     {
 
@@ -72,6 +81,7 @@ namespace ExcepcionesPersonalizadas
      
     }
 
+    [Serializable]
     public class ErrorBaseDeDatos : Exception
     {
 
@@ -84,6 +94,7 @@ namespace ExcepcionesPersonalizadas
        
     }
 
+    [Serializable]
     public class ErrorDocumentoInvalido : Exception
     {
         private const string Mensaje = "Escriba la CI sin puntos ni guiones";
@@ -95,6 +106,7 @@ namespace ExcepcionesPersonalizadas
        
     }
 
+    [Serializable]
     public class ErrorUsuarioYaExiste : Exception
     {
         private const string Mensaje = "ERROR: Usuario ya existe en el sistema";
@@ -106,6 +118,7 @@ namespace ExcepcionesPersonalizadas
       
     }
 
+    [Serializable]
     public class ErrorUsuarioNoExiste : Exception
     {
         private const string Mensaje = "ERROR: Usuario no existe en el sistema";
@@ -116,6 +129,8 @@ namespace ExcepcionesPersonalizadas
         }
       
     }
+
+    [Serializable]
     public class ErrorNoHayUsuarios : Exception
     {
         private const string Mensaje = "ERROR: No hay usuarios registrados en el sistema";
@@ -127,6 +142,7 @@ namespace ExcepcionesPersonalizadas
       
     }
 
+    [Serializable]
     public class ErrorCarpetaYaExiste : Exception
     {
         private const string Mensaje = "ERROR: Ya existe una carpeta con el mismo nombre.";
@@ -138,6 +154,7 @@ namespace ExcepcionesPersonalizadas
        
     }
 
+    [Serializable]
     public class ErrorNoHayMails : Exception
     {
         private const string Mensaje = "Carpeta está vacía - No hay ningún mail en esta carpeta.";
@@ -149,6 +166,7 @@ namespace ExcepcionesPersonalizadas
        
     }
 
+    [Serializable]
     public class ErrorEnvioEmail : Exception
     {
         private const string Mensaje = "Error al enviar email.";

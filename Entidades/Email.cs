@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Entidades
 {
+    [Serializable]
     public class Email
     {
         #region ATRIBUTOS Y PROPIEDADES

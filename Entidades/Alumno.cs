@@ -3,6 +3,7 @@ using System;
 
 namespace Entidades
 {
+    [Serializable]
     public class Alumno : Usuario
     {
         private List<Carpeta> _listaCarpetas;

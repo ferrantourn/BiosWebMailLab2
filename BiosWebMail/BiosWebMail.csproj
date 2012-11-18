@@ -209,10 +209,6 @@
       <Project>{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}</Project>
       <Name>Controles</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entidades\Entidades.csproj">
-      <Project>{5206827F-CEB2-4DD4-A434-8186923BB3D0}</Project>
-      <Name>Entidades</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ExcepcionesPersonalizadas\ExcepcionesPersonalizadas.csproj">
       <Project>{7FE23584-B3B3-48B9-911C-0DE0AE696C1E}</Project>
       <Name>ExcepcionesPersonalizadas</Name>
