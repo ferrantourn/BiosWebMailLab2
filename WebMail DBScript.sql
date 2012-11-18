@@ -18,7 +18,7 @@ GO
 use ObligatorioApp1
 GO
 
-create table Usuario (Ci int primary key not null,
+create table Usuario(Ci int primary key not null,
 					 NombreUsuario nvarchar (15) not null ,
 				     Nombre nvarchar (20) not null,
 					 Apellido nvarchar (20) not null,
@@ -41,20 +41,20 @@ create table Docente(Ci int primary key not null,
 GO
 
 create table Carpeta(Ci int not null,
-					 NumeroCarpeta int identity(1,1) not null,
+					 NumeroCarpeta int identity not null,
 					 NombreCarpeta nvarchar(20) not null,
+					 Descripcion nvarchar(max),
 					 foreign key (Ci) references Usuario(Ci),
 					 primary key (Ci,NumeroCarpeta))
 
 GO
 
-create table Mail(NumeroMail int identity(1,1) primary key not null,
-
+create table Mail(NumeroMail bigint primary key identity,
 				  CiR int not null,
-				  NumeroCarpetaR int,
+				  NumeroCarpetaR int not null,
 
 				  CiD int not null,
-				  NumeroCarpetaD int,
+				  NumeroCarpetaD int not null,
 
 				  Asunto nvarchar(max),
 				  Cuerpo nvarchar(max),
@@ -342,9 +342,9 @@ create proc spAltaCarpeta
 @NombreCarpeta nvarchar(20)
 as
 BEGIN
-if exists(select * from Carpeta where Carpeta.NombreCarpeta=@NombreCarpeta)
+if exists(select * from Carpeta where Carpeta.NombreCarpeta=@NombreCarpeta and Carpeta.Ci = @Ci)
 	begin
-		return -1 --Carpeta ya Existe
+		return -1 --Error Usuario con cédula @Ci ya tiene una carpeta de @NombreCarpeta
 	end
 
 if not exists(select * from Usuario where Usuario.Ci=@Ci)
@@ -592,7 +592,7 @@ end
 
 GO
 
-create procedure spActualiarStatusAlumno
+create procedure spActualizarStatusAlumno
 @ci as int,
 @SetStatus as bit
 as
