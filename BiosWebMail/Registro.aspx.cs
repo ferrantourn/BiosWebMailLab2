@@ -5,9 +5,9 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
-using ExcepcionesPersonalizadas;
-using Logica;
+//using Entidades;
+//using ExcepcionesPersonalizadas;
+//using Logica;
 
 namespace BiosWebMail
 {

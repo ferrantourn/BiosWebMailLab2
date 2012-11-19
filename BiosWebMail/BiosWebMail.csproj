@@ -37,6 +37,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -49,13 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccesoDenegado.aspx" />
-    <Content Include="AdminDocente\AlumnosSinMovimientos.aspx" />
-    <Content Include="AdminDocente\ActivarCuenta.aspx" />
     <Content Include="AdminAlumno\Email.aspx" />
-    <Content Include="AdminDocente\ListarDocentes.aspx" />
-    <Content Include="AdminDocente\ListarAlumnos.aspx" />
-    <Content Include="AdminDocente\HomeDocente.aspx" />
-    <Content Include="AdminDocente\Usuarios.aspx" />
     <Content Include="App_Themes\default\style.css" />
     <Content Include="Images\CarpetaEmail.png" />
     <Content Include="Images\EmailLeido.png" />
@@ -71,6 +67,27 @@
     <Content Include="UserControls\ConsultaCarpeta.ascx" />
     <Content Include="UserControls\UserControlPicture.ascx" />
     <Content Include="UserControls\Usuario.ascx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\refServiceWebMail\Alumno.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\refServiceWebMail\Carpeta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\refServiceWebMail\Docente.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\refServiceWebMail\Email.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\refServiceWebMail\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\refServiceWebMail\ServiceWebMail.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -78,6 +95,10 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <None Include="Web References\refServiceWebMail\ServiceWebMail.wsdl" />
+    <None Include="Web References\refServiceWebMail\Usuario.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDenegado.aspx.cs">
@@ -86,48 +107,6 @@
     </Compile>
     <Compile Include="AccesoDenegado.aspx.designer.cs">
       <DependentUpon>AccesoDenegado.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdminDocente\AlumnosSinMovimientos.aspx.cs">
-      <DependentUpon>AlumnosSinMovimientos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminDocente\AlumnosSinMovimientos.aspx.designer.cs">
-      <DependentUpon>AlumnosSinMovimientos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdminDocente\ActivarCuenta.aspx.cs">
-      <DependentUpon>ActivarCuenta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminDocente\ActivarCuenta.aspx.designer.cs">
-      <DependentUpon>ActivarCuenta.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdminDocente\ListarDocentes.aspx.cs">
-      <DependentUpon>ListarDocentes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminDocente\ListarDocentes.aspx.designer.cs">
-      <DependentUpon>ListarDocentes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdminDocente\ListarAlumnos.aspx.cs">
-      <DependentUpon>ListarAlumnos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminDocente\ListarAlumnos.aspx.designer.cs">
-      <DependentUpon>ListarAlumnos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdminDocente\HomeDocente.aspx.cs">
-      <DependentUpon>HomeDocente.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminDocente\HomeDocente.aspx.designer.cs">
-      <DependentUpon>HomeDocente.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AdminDocente\Usuarios.aspx.cs">
-      <DependentUpon>Usuarios.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminDocente\Usuarios.aspx.designer.cs">
-      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -142,13 +121,6 @@
     </Compile>
     <Compile Include="Masters\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Masters\SiteDocente.Master.cs">
-      <DependentUpon>SiteDocente.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Masters\SiteDocente.Master.designer.cs">
-      <DependentUpon>SiteDocente.Master</DependentUpon>
     </Compile>
     <Compile Include="AdminAlumno\Email.aspx.cs">
       <DependentUpon>Email.aspx</DependentUpon>
@@ -171,6 +143,11 @@
     </Compile>
     <Compile Include="Masters\SiteAlumno.Master.designer.cs">
       <DependentUpon>SiteAlumno.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
@@ -200,18 +177,20 @@
     <Compile Include="UserControls\Usuario.ascx.designer.cs">
       <DependentUpon>Usuario.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Web References\refServiceWebMail\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AdminDocente\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controles\Controles.csproj">
       <Project>{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}</Project>
       <Name>Controles</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExcepcionesPersonalizadas\ExcepcionesPersonalizadas.csproj">
-      <Project>{7FE23584-B3B3-48B9-911C-0DE0AE696C1E}</Project>
-      <Name>ExcepcionesPersonalizadas</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logica\Logica.csproj">
       <Project>{3D182DE6-CA16-471B-A67F-FDBDA736361F}</Project>
@@ -222,10 +201,23 @@
     <Content Include="Masters\SiteAlumno.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Masters\SiteDocente.Master" />
+    <Content Include="Masters\Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Masters\Site.Master" />
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:11321/ServiceWebMail.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\refServiceWebMail\</RelPath>
+      <UpdateFromURL>http://localhost:11321/ServiceWebMail.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>BiosWebMail_refServiceWebMail_ServiceWebMail</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

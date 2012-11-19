@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiosWebMail", "BiosWebMail\BiosWebMail.csproj", "{506F497B-6775-4F3E-B59A-2BEDB6BC8849}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7845380F-D796-451E-AB38-49B35C1247BF} = {7845380F-D796-451E-AB38-49B35C1247BF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{3D182DE6-CA16-471B-A67F-FDBDA736361F}"
 EndProject

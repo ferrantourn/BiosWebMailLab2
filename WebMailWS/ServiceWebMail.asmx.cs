@@ -3,6 +3,7 @@ using System.Web.Services;
 using Entidades;
 using Logica;
 
+
 namespace WebMailWS
 {
     /// <summary>
@@ -13,7 +14,7 @@ namespace WebMailWS
     [System.ComponentModel.ToolboxItem(false)]
     // Para permitir que se llame a este servicio Web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente. 
     // [System.Web.Script.Services.ScriptService]
-    public class Service : WebService
+    public class ServiceWebMail : WebService
     {
         //[WebMethod]
         //public string HelloWorld()
@@ -30,7 +31,7 @@ namespace WebMailWS
         }
 
         [WebMethod]
-        public List<Carpeta> ListarCarpetas (Alumno a)
+        public List<Carpeta> ListarCarpetas(Alumno a)
         {
             ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
             return lc.ListarCarpetas(a);
@@ -69,11 +70,11 @@ namespace WebMailWS
 
 
         #region WEB METHODS DE EMAILS
-
+        [WebMethod]
         public void AgregarEmail(Email newEmail, Alumno remitente, Alumno destinatario)
         {
             ILogicaEmails le = FabricaLogica.getLogicaEmails();
-            le.AgregarEmail(newEmail,remitente,destinatario);
+            le.AgregarEmail(newEmail, remitente, destinatario);
         }
 
         [WebMethod]
@@ -115,73 +116,85 @@ namespace WebMailWS
 
 
         #region WEB METHODS DE USUARIO
-
+        [WebMethod]
         public Alumno getAlumno(Alumno a)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             return le.getAlumno(a);
         }
 
-        public Alumno getAlumno(int ci)
+        [WebMethod]
+        public Alumno getAlumnoByCi(int ci)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             return le.getAlumno(ci);
         }
 
+        [WebMethod]
         public Docente getDocente(Docente d)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             return le.getDocente(d);
         }
 
+        [WebMethod]
         public void NuevoAlumno(Alumno a)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             le.NuevoAlumno(a);
         }
 
+        [WebMethod]
         public void NuevoDocente(Docente d)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             le.NuevoDocente(d);
         }
 
+        [WebMethod]
         public Usuario getLoginUsuario(string userName, string pass)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             return le.getLoginUsuario(userName, pass);
         }
 
+        [WebMethod]
         public List<Alumno> ListarAlumnosSinMovimientos(int NumeroDias)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             return le.ListarAlumnosSinMovimientos(NumeroDias);
         }
 
+        [WebMethod]
         public List<Docente> ListarDocentes()
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             return le.ListarDocentes();
         }
 
+
+        [WebMethod]
         public List<Alumno> ListarAlumnos()
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             return le.ListarAlumnos();
         }
 
+        [WebMethod]
         public void ActualizarStatusAlumno(Alumno a, bool setActiveStatus)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             le.ActualizarStatusAlumno(a, setActiveStatus);
         }
 
+        [WebMethod]
         public void ModificarAlumno(Alumno a)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
             le.ModificarAlumno(a);
         }
 
+        [WebMethod]
         public void ModificarDocente(Docente d)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();

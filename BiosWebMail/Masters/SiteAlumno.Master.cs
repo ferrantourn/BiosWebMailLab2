@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using Logica;
-using Entidades;
-using ExcepcionesPersonalizadas;
+//using Logica;
+//using Entidades;
+//using ExcepcionesPersonalizadas;
+using BiosWebMail.refServiceWebMail;
 
 namespace BiosWebMail
 {
-    public partial class SiteAlumno : System.Web.UI.MasterPage
+    public partial class SiteAlumno : MasterPage
     {
 
         public Alumno USUARIO_LOGUEADO

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Entidades;
-using ExcepcionesPersonalizadas;
-using Logica;
+//using Entidades;
+//using ExcepcionesPersonalizadas;
+//using Logica;
+using BiosWebMail.refServiceWebMail;
 
 namespace BiosWebMail.UserControls
 {
@@ -45,19 +41,22 @@ namespace BiosWebMail.UserControls
                         }
                         else if (Session["EditarUsuario"] is Docente)
                         {
+                            //11192012
+                            //ESTA SECCION YA NO ES NECESARIA YA QUE EL DOCENTE SE DA DE ALTA EN LA APLICACION WINDOWS
+                            //----------------------------------------------------------------------------------------
                             //cargamos la info para docente
-                            Docente d = (Docente) Session["EditarUsuario"];
-                            txtUserName.Text = d.NOMBRE_USUARIO;
-                            txtNombre.Text = d.NOMBRE;
-                            txtMateriasDesc.Visible = true;
-                            lblMaterias.Visible = true;
-                            txtDocumento.Text = Convert.ToString(d.CI);
-                            txtContraseña.Text = Convert.ToString(d.PASS);
-                            txtApellido.Text = d.APELLIDO;
-                            UCPicture.Visible = false;
-                            ddlRegistroComo.SelectedValue = "Docente";
-                            lblUserPicture.Visible = false;
-                            txtMateriasDesc.Text = d.MateriasToString();
+                            //Docente d = (Docente) Session["EditarUsuario"];
+                            //txtUserName.Text = d.NOMBRE_USUARIO;
+                            //txtNombre.Text = d.NOMBRE;
+                            //txtMateriasDesc.Visible = true;
+                            //lblMaterias.Visible = true;
+                            //txtDocumento.Text = Convert.ToString(d.CI);
+                            //txtContraseña.Text = Convert.ToString(d.PASS);
+                            //txtApellido.Text = d.APELLIDO;
+                            //UCPicture.Visible = false;
+                            //ddlRegistroComo.SelectedValue = "Docente";
+                            //lblUserPicture.Visible = false;
+                            //txtMateriasDesc.Text = d.MateriasToString();
                         }
                         else
                         {
@@ -101,39 +100,43 @@ namespace BiosWebMail.UserControls
                 string result = Validaciones();
                 if (String.IsNullOrEmpty(result))
                 {
-                    ILogicaUsuario lu = FabricaLogica.getLogicaUsuario();
+                    //ILogicaUsuario lu = FabricaLogica.getLogicaUsuario();
+                    ServiceWebMail sm = new ServiceWebMail();
                     if (ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE")
                     {
-                        Docente d;
-                        if (update)
-                            d = (Docente)Session["EditarUsuario"];
-                        else
-                            d = new Docente();
+                        //11192012
+                        //ESTA SECCION YA NO ES NECESARIA YA QUE EL DOCENTE SE DA DE ALTA EN LA APLICACION WINDOWS
+                        //----------------------------------------------------------------------------------------
+                        //Docente d;
+                        //if (update)
+                        //    d = (Docente)Session["EditarUsuario"];
+                        //else
+                        //    d = new Docente();
 
-                        d.APELLIDO = txtApellido.Text;
-                        d.CI = Convert.ToInt32(txtDocumento.Text);
-                        d.NOMBRE_USUARIO = txtUserName.Text;
-                        d.MATERIAS = txtMateriasDesc.Text.Split(',').ToList();
-                        d.NOMBRE = txtNombre.Text;
-                        d.PASS = txtContraseña.Text;
+                        //d.APELLIDO = txtApellido.Text;
+                        //d.CI = Convert.ToInt32(txtDocumento.Text);
+                        //d.NOMBRE_USUARIO = txtUserName.Text;
+                        //d.MATERIAS = txtMateriasDesc.Text.Split(',').ToList();
+                        //d.NOMBRE = txtNombre.Text;
+                        //d.PASS = txtContraseña.Text;
 
-                        if (update)
-                        {
-                            lu.ModificarDocente(d);
+                        //if (update)
+                        //{
+                        //    lu.ModificarDocente(d);
 
-                            lblInfo.Text =
-                                "Informacion actualizada";
-                            Response.Redirect("~/AdminDocente/ListarDocentes.aspx", false);
+                        //    lblInfo.Text =
+                        //        "Informacion actualizada";
+                        //    Response.Redirect("~/AdminDocente/ListarDocentes.aspx", false);
 
-                        }
-                        else
-                        {
-                            lu.NuevoDocente(d);
+                        //}
+                        //else
+                        //{
+                        //    lu.NuevoDocente(d);
 
-                            lblInfo.Text =
-                                "Impeca!!, fuiste registrado. Valida tu usuario y password para ingresar al sistema";
-                            ClearForm();
-                        }
+                        //    lblInfo.Text =
+                        //        "Impeca!!, fuiste registrado. Valida tu usuario y password para ingresar al sistema";
+                        //    ClearForm();
+                        //}
                     }
                     else if (ddlRegistroComo.SelectedValue.ToUpper() == "ALUMNO")
                     {
@@ -157,13 +160,15 @@ namespace BiosWebMail.UserControls
 
                         if (update)
                         {
-                            lu.ModificarAlumno(a);
+                            //lu.ModificarAlumno(a);
+                            sm.ModificarAlumno(a);
                             lblInfo.Text = "Informacion actualizada";
                             Response.Redirect("~/AdminDocente/ListarAlumnos.aspx",false);
                         }
                         else
                         {
-                            lu.NuevoAlumno(a);
+                            //lu.NuevoAlumno(a);
+                            sm.NuevoAlumno(a);
 
                             lblInfo.Text =
                                 "Sabelo!!, fuiste registrado. Valida tu usuario y password para ingresar al sistema";
@@ -180,10 +185,10 @@ namespace BiosWebMail.UserControls
                     lblInfo.Text = result;
                 }
             }
-            catch (ErrorUsuarioYaExiste)
-            {
-                lblInfo.Text = "Error: El usuario con documento " + txtDocumento.Text + " o nombre de usuario " + txtUserName.Text + " ya se encuentra registrado.";
-            }
+            //catch (ErrorUsuarioYaExiste ex)
+            //{
+            //    lblInfo.Text = "Error: El usuario con documento " + txtDocumento.Text + " o nombre de usuario " + txtUserName.Text + " ya se encuentra registrado.";
+            //}
             catch (Exception ex)
             {
                 lblInfo.Text = ex.Message;

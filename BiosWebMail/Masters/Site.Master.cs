@@ -4,9 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
-using ExcepcionesPersonalizadas;
-using Logica;
+//using Entidades;
+//using ExcepcionesPersonalizadas;
+//using Logica;
+using BiosWebMail.refServiceWebMail;
 
 namespace BiosWebMail.Masters
 {
@@ -38,8 +39,11 @@ namespace BiosWebMail.Masters
         {
             try
             {
-                ILogicaUsuario LogicaUsuario = FabricaLogica.getLogicaUsuario();
-                Usuario NuevoUsuario = LogicaUsuario.getLoginUsuario(txtUsuario.Text, txtPass.Text);
+                //ILogicaUsuario LogicaUsuario = FabricaLogica.getLogicaUsuario();
+                ServiceWebMail sm = new ServiceWebMail();
+                //Usuario NuevoUsuario = LogicaUsuario.getLoginUsuario(txtUsuario.Text, txtPass.Text);
+                Usuario NuevoUsuario = sm.getLoginUsuario(txtUsuario.Text, txtPass.Text);
+
                 USUARIO_LOGUEADO = NuevoUsuario;
                 if (NuevoUsuario != null)
                 {
@@ -52,14 +56,14 @@ namespace BiosWebMail.Masters
                     lblError.Text = "El usuario o contraseña ingresados no son validos. Media pila! ...";
                 }
             }
-            catch (ErrorAlumnoBloqueado ex)
-            {
-                lblError.Text =  ex.ToString();
-            }
-            catch (ErrorUsuarioContraseñaIncorrecto ex)
-            {
-                lblError.Text = ex.ToString();
-            }
+            //catch (ErrorAlumnoBloqueado ex)
+            //{
+            //    lblError.Text =  ex.Message;
+            //}
+            //catch (ErrorUsuarioContraseñaIncorrecto ex)
+            //{
+            //    lblError.Text = ex.ToString();
+            //}
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;

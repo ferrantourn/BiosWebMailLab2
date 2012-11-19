@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
-using Entidades;
-using Logica;
+//using Entidades;
+//using Logica;
+using BiosWebMail.refServiceWebMail;
 
 namespace BiosWebMail.UserControls
 {
@@ -39,7 +40,8 @@ namespace BiosWebMail.UserControls
         {
             try
             {
-                ILogicaEmails le = FabricaLogica.getLogicaEmails();
+                //ILogicaEmails le = FabricaLogica.getLogicaEmails();
+                ServiceWebMail sm = new ServiceWebMail();
                 if (e.CommandName.ToUpper() == "VER")
                 {
                     //OBTENEMOS EL EMAIL
@@ -55,8 +57,9 @@ namespace BiosWebMail.UserControls
                     //MARCAR EMAIL COMO LEIDO
                     //-----------------------
                     //le.MarcarEmailLeido(Convert.ToInt32(e.CommandArgument), CARPETA.NUMERO_CARPETA);
-                    Entidades.Email email = new Entidades.Email {NUMERO_EMAIL = Convert.ToInt32(e.CommandArgument)};
-                    le.MarcarEmailLeido(email, CARPETA);
+                    refServiceWebMail.Email email = new refServiceWebMail.Email { NUMERO_EMAIL = Convert.ToInt32(e.CommandArgument) };
+                    //le.MarcarEmailLeido(email, CARPETA);
+                    sm.MarcarEmailLeido(email,CARPETA);
 
 
                     Response.Redirect("~/AdminAlumno/Email.aspx", false);
@@ -64,9 +67,10 @@ namespace BiosWebMail.UserControls
                 else if (e.CommandName.ToUpper() == "ELIMINAR")
                 {
                     //le.EliminarEmail(Convert.ToInt32(e.CommandArgument), CARPETA.NUMERO_CARPETA, ((Alumno)Session["Usuario"]).CI);
-                    Entidades.Email email = new Entidades.Email {NUMERO_EMAIL = Convert.ToInt32(e.CommandArgument)};
+                    refServiceWebMail.Email email = new refServiceWebMail.Email { NUMERO_EMAIL = Convert.ToInt32(e.CommandArgument) };
                     CARPETA.USUARIO = ((Alumno)Session["Usuario"]);
-                    le.EliminarEmail(email, CARPETA);
+                    //le.EliminarEmail(email, CARPETA);
+                    sm.EliminarEmail(email,CARPETA);
                     lblInfo.Text = "Email eliminado";
                 }
             }
@@ -87,9 +91,12 @@ namespace BiosWebMail.UserControls
 
                 //CARGA LOS EMAILS EN FUNCION DE LA PROPIEDAD CODIGO_CARPETA
                 //----------------------------------------------------------
-                ILogicaEmails le = FabricaLogica.getLogicaEmails();
+                //ILogicaEmails le = FabricaLogica.getLogicaEmails();
+                ServiceWebMail sm = new ServiceWebMail();
                 CARPETA.USUARIO = ((Alumno)Session["Usuario"]);
-                EmailListRepeater.DataSource = le.ListarEmail(CARPETA);
+                //EmailListRepeater.DataSource = le.ListarEmail(CARPETA);
+                EmailListRepeater.DataSource = sm.ListarEmail(CARPETA);
+                
                 EmailListRepeater.DataBind();
             }
             catch (Exception ex)
@@ -107,7 +114,7 @@ namespace BiosWebMail.UserControls
                     //-- Creo el objeto que tiene los datos de la ROW del Listview
                     //----------------------------------------------------------------
                     RepeaterItem dataItem = e.Item;
-                    Entidades.Email data = (Entidades.Email)dataItem.DataItem;
+                    refServiceWebMail.Email data = (refServiceWebMail.Email)dataItem.DataItem;
                     //EMAIL --- REDUCIMOS EL CAMPO SI SUPERA UN NUMERO DADO DE CARACTERES
                     //-----------------------------------------------------------------------------
                     if (!String.IsNullOrEmpty(data.ASUNTO) && data.ASUNTO.Count() > 60)

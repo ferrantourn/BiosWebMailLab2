@@ -47,7 +47,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service.asmx" />
+    <Content Include="ServiceWebMail.asmx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -57,8 +57,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service.asmx.cs">
-      <DependentUpon>Service.asmx</DependentUpon>
+    <Compile Include="ServiceWebMail.asmx.cs">
+      <DependentUpon>ServiceWebMail.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,7 +87,7 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>11321</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>

@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://WebMailWS/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://WebMailWS/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://WebMailWS/">
+      <s:element name="AgregarCarpeta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="c" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Carpeta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="USUARIO" type="tns:Alumno" />
+          <s:element minOccurs="1" maxOccurs="1" name="NUMERO_CARPETA" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOMBRE_CARPETA" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TOTAL_EMAILS" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TOTAL_EMAILS_NOLEIDOS" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LISTA_EMAIL" type="tns:ArrayOfEmail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Alumno">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Usuario">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="LISTA_CARPETAS" type="tns:ArrayOfCarpeta" />
+              <s:element minOccurs="0" maxOccurs="1" name="FOTO" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ACTIVO" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Usuario">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CI" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOMBRE_USUARIO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NOMBRE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="APELLIDO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PASS" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCarpeta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Carpeta" nillable="true" type="tns:Carpeta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEmail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Email" nillable="true" type="tns:Email" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Email">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="NUMERO_EMAIL" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CARPETA_REMITENTE" type="tns:Carpeta" />
+          <s:element minOccurs="0" maxOccurs="1" name="CARPETA_DESTINATARIO" type="tns:Carpeta" />
+          <s:element minOccurs="0" maxOccurs="1" name="CUERPO" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ASUNTO" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LEIDO" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="FECHA" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AgregarCarpetaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarCarpetas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="a" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarCarpetasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarCarpetasResult" type="tns:ArrayOfCarpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarCarpeta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="c" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarCarpetaResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="getInboxFolder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="a" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getInboxFolderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getInboxFolderResult" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCarpetaSistema">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="c" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsCarpetaSistemaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsCarpetaSistemaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCarpeta">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="c" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCarpetaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCarpetaResult" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="newEmail" type="tns:Email" />
+            <s:element minOccurs="0" maxOccurs="1" name="remitente" type="tns:Alumno" />
+            <s:element minOccurs="0" maxOccurs="1" name="destinatario" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgregarEmailResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="c" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarEmailResult" type="tns:ArrayOfEmail" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="e" type="tns:Email" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmailResult" type="tns:Email" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="e" type="tns:Email" />
+            <s:element minOccurs="0" maxOccurs="1" name="carpeta" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EliminarEmailResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="MarcarEmailLeido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="e" type="tns:Email" />
+            <s:element minOccurs="0" maxOccurs="1" name="c" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MarcarEmailLeidoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="MoverEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="e" type="tns:Email" />
+            <s:element minOccurs="0" maxOccurs="1" name="carpetaActual" type="tns:Carpeta" />
+            <s:element minOccurs="0" maxOccurs="1" name="carpetaDestino" type="tns:Carpeta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MoverEmailResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="getAlumno">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="a" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAlumnoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getAlumnoResult" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAlumnoByCi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ci" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAlumnoByCiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getAlumnoByCiResult" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getDocente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="d" type="tns:Docente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Docente">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Usuario">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="MATERIAS" type="tns:ArrayOfString" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getDocenteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getDocenteResult" type="tns:Docente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NuevoAlumno">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="a" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NuevoAlumnoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="NuevoDocente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="d" type="tns:Docente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NuevoDocenteResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="getLoginUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLoginUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLoginUsuarioResult" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarAlumnosSinMovimientos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NumeroDias" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarAlumnosSinMovimientosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarAlumnosSinMovimientosResult" type="tns:ArrayOfAlumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAlumno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Alumno" nillable="true" type="tns:Alumno" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListarDocentes">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarDocentesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarDocentesResult" type="tns:ArrayOfDocente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDocente">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Docente" nillable="true" type="tns:Docente" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListarAlumnos">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarAlumnosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarAlumnosResult" type="tns:ArrayOfAlumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarStatusAlumno">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="a" type="tns:Alumno" />
+            <s:element minOccurs="1" maxOccurs="1" name="setActiveStatus" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ActualizarStatusAlumnoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ModificarAlumno">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="a" type="tns:Alumno" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarAlumnoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ModificarDocente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="d" type="tns:Docente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarDocenteResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AgregarCarpetaSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarCarpeta" />
+  </wsdl:message>
+  <wsdl:message name="AgregarCarpetaSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarCarpetaResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarCarpetasSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarCarpetas" />
+  </wsdl:message>
+  <wsdl:message name="ListarCarpetasSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarCarpetasResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarCarpetaSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarCarpeta" />
+  </wsdl:message>
+  <wsdl:message name="EliminarCarpetaSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarCarpetaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getInboxFolderSoapIn">
+    <wsdl:part name="parameters" element="tns:getInboxFolder" />
+  </wsdl:message>
+  <wsdl:message name="getInboxFolderSoapOut">
+    <wsdl:part name="parameters" element="tns:getInboxFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsCarpetaSistemaSoapIn">
+    <wsdl:part name="parameters" element="tns:IsCarpetaSistema" />
+  </wsdl:message>
+  <wsdl:message name="IsCarpetaSistemaSoapOut">
+    <wsdl:part name="parameters" element="tns:IsCarpetaSistemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCarpetaSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCarpeta" />
+  </wsdl:message>
+  <wsdl:message name="GetCarpetaSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCarpetaResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgregarEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:AgregarEmail" />
+  </wsdl:message>
+  <wsdl:message name="AgregarEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:AgregarEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarEmail" />
+  </wsdl:message>
+  <wsdl:message name="ListarEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmail" />
+  </wsdl:message>
+  <wsdl:message name="GetEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="EliminarEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:EliminarEmail" />
+  </wsdl:message>
+  <wsdl:message name="EliminarEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:EliminarEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="MarcarEmailLeidoSoapIn">
+    <wsdl:part name="parameters" element="tns:MarcarEmailLeido" />
+  </wsdl:message>
+  <wsdl:message name="MarcarEmailLeidoSoapOut">
+    <wsdl:part name="parameters" element="tns:MarcarEmailLeidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="MoverEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:MoverEmail" />
+  </wsdl:message>
+  <wsdl:message name="MoverEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:MoverEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAlumnoSoapIn">
+    <wsdl:part name="parameters" element="tns:getAlumno" />
+  </wsdl:message>
+  <wsdl:message name="getAlumnoSoapOut">
+    <wsdl:part name="parameters" element="tns:getAlumnoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAlumnoByCiSoapIn">
+    <wsdl:part name="parameters" element="tns:getAlumnoByCi" />
+  </wsdl:message>
+  <wsdl:message name="getAlumnoByCiSoapOut">
+    <wsdl:part name="parameters" element="tns:getAlumnoByCiResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDocenteSoapIn">
+    <wsdl:part name="parameters" element="tns:getDocente" />
+  </wsdl:message>
+  <wsdl:message name="getDocenteSoapOut">
+    <wsdl:part name="parameters" element="tns:getDocenteResponse" />
+  </wsdl:message>
+  <wsdl:message name="NuevoAlumnoSoapIn">
+    <wsdl:part name="parameters" element="tns:NuevoAlumno" />
+  </wsdl:message>
+  <wsdl:message name="NuevoAlumnoSoapOut">
+    <wsdl:part name="parameters" element="tns:NuevoAlumnoResponse" />
+  </wsdl:message>
+  <wsdl:message name="NuevoDocenteSoapIn">
+    <wsdl:part name="parameters" element="tns:NuevoDocente" />
+  </wsdl:message>
+  <wsdl:message name="NuevoDocenteSoapOut">
+    <wsdl:part name="parameters" element="tns:NuevoDocenteResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoginUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:getLoginUsuario" />
+  </wsdl:message>
+  <wsdl:message name="getLoginUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:getLoginUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarAlumnosSinMovimientosSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarAlumnosSinMovimientos" />
+  </wsdl:message>
+  <wsdl:message name="ListarAlumnosSinMovimientosSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarAlumnosSinMovimientosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarDocentesSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarDocentes" />
+  </wsdl:message>
+  <wsdl:message name="ListarDocentesSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarDocentesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarAlumnosSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarAlumnos" />
+  </wsdl:message>
+  <wsdl:message name="ListarAlumnosSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarAlumnosResponse" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarStatusAlumnoSoapIn">
+    <wsdl:part name="parameters" element="tns:ActualizarStatusAlumno" />
+  </wsdl:message>
+  <wsdl:message name="ActualizarStatusAlumnoSoapOut">
+    <wsdl:part name="parameters" element="tns:ActualizarStatusAlumnoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarAlumnoSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarAlumno" />
+  </wsdl:message>
+  <wsdl:message name="ModificarAlumnoSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarAlumnoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarDocenteSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarDocente" />
+  </wsdl:message>
+  <wsdl:message name="ModificarDocenteSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarDocenteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceWebMailSoap">
+    <wsdl:operation name="AgregarCarpeta">
+      <wsdl:input message="tns:AgregarCarpetaSoapIn" />
+      <wsdl:output message="tns:AgregarCarpetaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarCarpetas">
+      <wsdl:input message="tns:ListarCarpetasSoapIn" />
+      <wsdl:output message="tns:ListarCarpetasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarCarpeta">
+      <wsdl:input message="tns:EliminarCarpetaSoapIn" />
+      <wsdl:output message="tns:EliminarCarpetaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getInboxFolder">
+      <wsdl:input message="tns:getInboxFolderSoapIn" />
+      <wsdl:output message="tns:getInboxFolderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsCarpetaSistema">
+      <wsdl:input message="tns:IsCarpetaSistemaSoapIn" />
+      <wsdl:output message="tns:IsCarpetaSistemaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCarpeta">
+      <wsdl:input message="tns:GetCarpetaSoapIn" />
+      <wsdl:output message="tns:GetCarpetaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEmail">
+      <wsdl:input message="tns:AgregarEmailSoapIn" />
+      <wsdl:output message="tns:AgregarEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarEmail">
+      <wsdl:input message="tns:ListarEmailSoapIn" />
+      <wsdl:output message="tns:ListarEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmail">
+      <wsdl:input message="tns:GetEmailSoapIn" />
+      <wsdl:output message="tns:GetEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEmail">
+      <wsdl:input message="tns:EliminarEmailSoapIn" />
+      <wsdl:output message="tns:EliminarEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MarcarEmailLeido">
+      <wsdl:input message="tns:MarcarEmailLeidoSoapIn" />
+      <wsdl:output message="tns:MarcarEmailLeidoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MoverEmail">
+      <wsdl:input message="tns:MoverEmailSoapIn" />
+      <wsdl:output message="tns:MoverEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAlumno">
+      <wsdl:input message="tns:getAlumnoSoapIn" />
+      <wsdl:output message="tns:getAlumnoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAlumnoByCi">
+      <wsdl:input message="tns:getAlumnoByCiSoapIn" />
+      <wsdl:output message="tns:getAlumnoByCiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getDocente">
+      <wsdl:input message="tns:getDocenteSoapIn" />
+      <wsdl:output message="tns:getDocenteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NuevoAlumno">
+      <wsdl:input message="tns:NuevoAlumnoSoapIn" />
+      <wsdl:output message="tns:NuevoAlumnoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NuevoDocente">
+      <wsdl:input message="tns:NuevoDocenteSoapIn" />
+      <wsdl:output message="tns:NuevoDocenteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoginUsuario">
+      <wsdl:input message="tns:getLoginUsuarioSoapIn" />
+      <wsdl:output message="tns:getLoginUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlumnosSinMovimientos">
+      <wsdl:input message="tns:ListarAlumnosSinMovimientosSoapIn" />
+      <wsdl:output message="tns:ListarAlumnosSinMovimientosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarDocentes">
+      <wsdl:input message="tns:ListarDocentesSoapIn" />
+      <wsdl:output message="tns:ListarDocentesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlumnos">
+      <wsdl:input message="tns:ListarAlumnosSoapIn" />
+      <wsdl:output message="tns:ListarAlumnosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarStatusAlumno">
+      <wsdl:input message="tns:ActualizarStatusAlumnoSoapIn" />
+      <wsdl:output message="tns:ActualizarStatusAlumnoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarAlumno">
+      <wsdl:input message="tns:ModificarAlumnoSoapIn" />
+      <wsdl:output message="tns:ModificarAlumnoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarDocente">
+      <wsdl:input message="tns:ModificarDocenteSoapIn" />
+      <wsdl:output message="tns:ModificarDocenteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceWebMailSoap" type="tns:ServiceWebMailSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AgregarCarpeta">
+      <soap:operation soapAction="http://WebMailWS/AgregarCarpeta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarCarpetas">
+      <soap:operation soapAction="http://WebMailWS/ListarCarpetas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarCarpeta">
+      <soap:operation soapAction="http://WebMailWS/EliminarCarpeta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInboxFolder">
+      <soap:operation soapAction="http://WebMailWS/getInboxFolder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCarpetaSistema">
+      <soap:operation soapAction="http://WebMailWS/IsCarpetaSistema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarpeta">
+      <soap:operation soapAction="http://WebMailWS/GetCarpeta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEmail">
+      <soap:operation soapAction="http://WebMailWS/AgregarEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEmail">
+      <soap:operation soapAction="http://WebMailWS/ListarEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmail">
+      <soap:operation soapAction="http://WebMailWS/GetEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEmail">
+      <soap:operation soapAction="http://WebMailWS/EliminarEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarcarEmailLeido">
+      <soap:operation soapAction="http://WebMailWS/MarcarEmailLeido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoverEmail">
+      <soap:operation soapAction="http://WebMailWS/MoverEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAlumno">
+      <soap:operation soapAction="http://WebMailWS/getAlumno" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAlumnoByCi">
+      <soap:operation soapAction="http://WebMailWS/getAlumnoByCi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocente">
+      <soap:operation soapAction="http://WebMailWS/getDocente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NuevoAlumno">
+      <soap:operation soapAction="http://WebMailWS/NuevoAlumno" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NuevoDocente">
+      <soap:operation soapAction="http://WebMailWS/NuevoDocente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoginUsuario">
+      <soap:operation soapAction="http://WebMailWS/getLoginUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlumnosSinMovimientos">
+      <soap:operation soapAction="http://WebMailWS/ListarAlumnosSinMovimientos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarDocentes">
+      <soap:operation soapAction="http://WebMailWS/ListarDocentes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlumnos">
+      <soap:operation soapAction="http://WebMailWS/ListarAlumnos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarStatusAlumno">
+      <soap:operation soapAction="http://WebMailWS/ActualizarStatusAlumno" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarAlumno">
+      <soap:operation soapAction="http://WebMailWS/ModificarAlumno" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarDocente">
+      <soap:operation soapAction="http://WebMailWS/ModificarDocente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceWebMailSoap12" type="tns:ServiceWebMailSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AgregarCarpeta">
+      <soap12:operation soapAction="http://WebMailWS/AgregarCarpeta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarCarpetas">
+      <soap12:operation soapAction="http://WebMailWS/ListarCarpetas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarCarpeta">
+      <soap12:operation soapAction="http://WebMailWS/EliminarCarpeta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInboxFolder">
+      <soap12:operation soapAction="http://WebMailWS/getInboxFolder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsCarpetaSistema">
+      <soap12:operation soapAction="http://WebMailWS/IsCarpetaSistema" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCarpeta">
+      <soap12:operation soapAction="http://WebMailWS/GetCarpeta" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEmail">
+      <soap12:operation soapAction="http://WebMailWS/AgregarEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarEmail">
+      <soap12:operation soapAction="http://WebMailWS/ListarEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmail">
+      <soap12:operation soapAction="http://WebMailWS/GetEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarEmail">
+      <soap12:operation soapAction="http://WebMailWS/EliminarEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MarcarEmailLeido">
+      <soap12:operation soapAction="http://WebMailWS/MarcarEmailLeido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoverEmail">
+      <soap12:operation soapAction="http://WebMailWS/MoverEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAlumno">
+      <soap12:operation soapAction="http://WebMailWS/getAlumno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAlumnoByCi">
+      <soap12:operation soapAction="http://WebMailWS/getAlumnoByCi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocente">
+      <soap12:operation soapAction="http://WebMailWS/getDocente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NuevoAlumno">
+      <soap12:operation soapAction="http://WebMailWS/NuevoAlumno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NuevoDocente">
+      <soap12:operation soapAction="http://WebMailWS/NuevoDocente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoginUsuario">
+      <soap12:operation soapAction="http://WebMailWS/getLoginUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlumnosSinMovimientos">
+      <soap12:operation soapAction="http://WebMailWS/ListarAlumnosSinMovimientos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarDocentes">
+      <soap12:operation soapAction="http://WebMailWS/ListarDocentes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarAlumnos">
+      <soap12:operation soapAction="http://WebMailWS/ListarAlumnos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ActualizarStatusAlumno">
+      <soap12:operation soapAction="http://WebMailWS/ActualizarStatusAlumno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarAlumno">
+      <soap12:operation soapAction="http://WebMailWS/ModificarAlumno" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarDocente">
+      <soap12:operation soapAction="http://WebMailWS/ModificarDocente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceWebMail">
+    <wsdl:port name="ServiceWebMailSoap" binding="tns:ServiceWebMailSoap">
+      <soap:address location="http://localhost:11321/ServiceWebMail.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceWebMailSoap12" binding="tns:ServiceWebMailSoap12">
+      <soap12:address location="http://localhost:11321/ServiceWebMail.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
-using Logica;
+using BiosWebMail.refServiceWebMail;
 
 namespace BiosWebMail
 {
@@ -30,13 +29,14 @@ namespace BiosWebMail
 
                     //CARGAMOS CARPETA INBOX DEL USUARIO LOGUEADO POR DEFECTO
                     //-------------------------------------------------------
-                    ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                    //ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                    ServiceWebMail sm = new ServiceWebMail();
                     SiteAlumno master = (SiteAlumno)Master;
                     if (master != null && master.USUARIO_LOGUEADO != null)
                     {
                         //Carpeta inbox = lc.getInboxFolder(master.USUARIO_LOGUEADO.CI);
-                        Carpeta inbox = lc.getInboxFolder(master.USUARIO_LOGUEADO);
-
+                        //Carpeta inbox = lc.getInboxFolder(master.USUARIO_LOGUEADO);
+                        Carpeta inbox = sm.getInboxFolder((Alumno)master.USUARIO_LOGUEADO);
                         if (inbox != null)
                             ConsultaCarpeta.CARPETA = inbox;
                     }
@@ -54,13 +54,15 @@ namespace BiosWebMail
             {
                 if (!String.IsNullOrEmpty(txtNuevaCarpetaNombre.Text))
                 {
-                    ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                    //ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                    ServiceWebMail sm = new ServiceWebMail();
+
                     Carpeta c = new Carpeta();
                     SiteAlumno master = (SiteAlumno)Master;
                     c.NOMBRE_CARPETA = txtNuevaCarpetaNombre.Text;
                     c.USUARIO = master.USUARIO_LOGUEADO;
-                    lc.AgregarCarpeta(c);
-
+                    //lc.AgregarCarpeta(c);
+                    sm.AgregarCarpeta(c);
                     RefreshFolders();
                     lblInfo.Text = "Carpeta creada";
                     txtNuevaCarpetaNombre.Text = "";
@@ -86,11 +88,15 @@ namespace BiosWebMail
         {
             try
             {
-                ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                //ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                ServiceWebMail sm = new ServiceWebMail();
+
                 SiteAlumno master = (SiteAlumno)Master;
                 if (master != null)
                 {
-                    FolderListRepeater.DataSource = lc.ListarCarpetas((Alumno)master.USUARIO_LOGUEADO);
+                    //FolderListRepeater.DataSource = lc.ListarCarpetas((Alumno)master.USUARIO_LOGUEADO);
+                    FolderListRepeater.DataSource = sm.ListarCarpetas((Alumno)master.USUARIO_LOGUEADO);
+
                     FolderListRepeater.DataBind();
                 }
             }
@@ -104,7 +110,8 @@ namespace BiosWebMail
         {
             try
             {
-                ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                //ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                ServiceWebMail sm = new ServiceWebMail();
 
                 if (e.CommandName.ToUpper() == "CONSULTAR")
                 {
@@ -116,7 +123,9 @@ namespace BiosWebMail
                                         NUMERO_CARPETA = Convert.ToInt32(e.CommandArgument),
                                         USUARIO = ((Alumno) Session["Usuario"])
                                     };
-                    Carpeta currentFolder = lc.GetCarpeta(c);
+                    //Carpeta currentFolder = lc.GetCarpeta(c);
+                    Carpeta currentFolder = sm.GetCarpeta(c);
+
 
                     ConsultaCarpeta.CARPETA = currentFolder;
                 }
@@ -128,7 +137,8 @@ namespace BiosWebMail
                     Carpeta c = new Carpeta();
                     c.NUMERO_CARPETA = Convert.ToInt32(e.CommandArgument);
                     //lc.EliminarCarpeta(Convert.ToInt32(e.CommandArgument));
-                    lc.EliminarCarpeta(c);
+                    //lc.EliminarCarpeta(c);
+                    sm.EliminarCarpeta(c);
 
                     lblInfo.Text = "Carpeta Eliminada";
                     RefreshFolders();
@@ -150,8 +160,11 @@ namespace BiosWebMail
                     //----------------------------------------------------------------
                     RepeaterItem dataItem = e.Item;
                     Carpeta folder = (Carpeta)dataItem.DataItem;
-                    ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
-                    if (lc.IsCarpetaSistema(folder))
+                    //ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
+                    ServiceWebMail sm = new ServiceWebMail();
+
+                    //if (lc.IsCarpetaSistema(folder))
+                    if (sm.IsCarpetaSistema(folder))
                     {
                         dataItem.FindControl("lnkEliminar").Visible = false;
                     }
