@@ -19,25 +19,25 @@ namespace BiosWebMail.UserControls
                 {
                     if (Session["EditarUsuario"] != null)
                     {
-                        lblRegistrarme.Visible = false;
-                        ddlRegistroComo.Visible = false;
+                        //lblRegistrarme.Visible = false;
+                        //ddlRegistroComo.Visible = false;
                         btnUpdate.Visible = true;
                         btnRegistrar.Visible = false;
 
                         if (Session["EditarUsuario"] is Alumno)
                         {
                             //cargamos la informacion para alumno
-                            Alumno a = (Alumno) Session["EditarUsuario"];
+                            Alumno a = (Alumno)Session["EditarUsuario"];
                             txtUserName.Text = a.NOMBRE_USUARIO;
                             txtNombre.Text = a.NOMBRE;
-                            txtMateriasDesc.Visible = false;
-                            lblMaterias.Visible = false;
+                            //txtMateriasDesc.Visible = false;
+                            //lblMaterias.Visible = false;
                             txtDocumento.Text = Convert.ToString(a.CI);
                             txtContraseña.Text = Convert.ToString(a.PASS);
                             txtApellido.Text = a.APELLIDO;
                             UCPicture.Visible = true;
                             UCPicture.CargarFotos(Convert.ToString(a.FOTO));
-                            ddlRegistroComo.SelectedValue = "Alumno";
+                            //ddlRegistroComo.SelectedValue = "Alumno";
                         }
                         else if (Session["EditarUsuario"] is Docente)
                         {
@@ -102,83 +102,83 @@ namespace BiosWebMail.UserControls
                 {
                     //ILogicaUsuario lu = FabricaLogica.getLogicaUsuario();
                     ServiceWebMail sm = new ServiceWebMail();
-                    if (ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE")
+                    //if (ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE")
+                    //{
+                    //11192012
+                    //ESTA SECCION YA NO ES NECESARIA YA QUE EL DOCENTE SE DA DE ALTA EN LA APLICACION WINDOWS
+                    //----------------------------------------------------------------------------------------
+                    //Docente d;
+                    //if (update)
+                    //    d = (Docente)Session["EditarUsuario"];
+                    //else
+                    //    d = new Docente();
+
+                    //d.APELLIDO = txtApellido.Text;
+                    //d.CI = Convert.ToInt32(txtDocumento.Text);
+                    //d.NOMBRE_USUARIO = txtUserName.Text;
+                    //d.MATERIAS = txtMateriasDesc.Text.Split(',').ToList();
+                    //d.NOMBRE = txtNombre.Text;
+                    //d.PASS = txtContraseña.Text;
+
+                    //if (update)
+                    //{
+                    //    lu.ModificarDocente(d);
+
+                    //    lblInfo.Text =
+                    //        "Informacion actualizada";
+                    //    Response.Redirect("~/AdminDocente/ListarDocentes.aspx", false);
+
+                    //}
+                    //else
+                    //{
+                    //    lu.NuevoDocente(d);
+
+                    //    lblInfo.Text =
+                    //        "Impeca!!, fuiste registrado. Valida tu usuario y password para ingresar al sistema";
+                    //    ClearForm();
+                    //}
+                    //}
+                    //else if (ddlRegistroComo.SelectedValue.ToUpper() == "ALUMNO")
+                    //{
+                    Alumno a;
+                    if (update)
+                        a = (Alumno)Session["EditarUsuario"];
+                    else
+                        a = new Alumno();
+
+                    a.APELLIDO = txtApellido.Text;
+                    a.CI = Convert.ToInt32(txtDocumento.Text);
+                    a.NOMBRE_USUARIO = txtUserName.Text;
+                    a.NOMBRE = txtNombre.Text;
+                    a.FOTO = Convert.ToString(a.CI) + "." + UCPicture.GetFileNameExtension;
+                    a.PASS = txtContraseña.Text;
+                    a.ACTIVO = true;
+
+                    //GUARDO LA FOTO EN UNA CARPETA
+                    //-----------------------------
+                    UCPicture.GuardarFotos(Convert.ToString(a.CI));
+
+                    if (update)
                     {
-                        //11192012
-                        //ESTA SECCION YA NO ES NECESARIA YA QUE EL DOCENTE SE DA DE ALTA EN LA APLICACION WINDOWS
-                        //----------------------------------------------------------------------------------------
-                        //Docente d;
-                        //if (update)
-                        //    d = (Docente)Session["EditarUsuario"];
-                        //else
-                        //    d = new Docente();
-
-                        //d.APELLIDO = txtApellido.Text;
-                        //d.CI = Convert.ToInt32(txtDocumento.Text);
-                        //d.NOMBRE_USUARIO = txtUserName.Text;
-                        //d.MATERIAS = txtMateriasDesc.Text.Split(',').ToList();
-                        //d.NOMBRE = txtNombre.Text;
-                        //d.PASS = txtContraseña.Text;
-
-                        //if (update)
-                        //{
-                        //    lu.ModificarDocente(d);
-
-                        //    lblInfo.Text =
-                        //        "Informacion actualizada";
-                        //    Response.Redirect("~/AdminDocente/ListarDocentes.aspx", false);
-
-                        //}
-                        //else
-                        //{
-                        //    lu.NuevoDocente(d);
-
-                        //    lblInfo.Text =
-                        //        "Impeca!!, fuiste registrado. Valida tu usuario y password para ingresar al sistema";
-                        //    ClearForm();
-                        //}
-                    }
-                    else if (ddlRegistroComo.SelectedValue.ToUpper() == "ALUMNO")
-                    {
-                        Alumno a;
-                        if (update)
-                            a = (Alumno)Session["EditarUsuario"];
-                        else
-                            a = new Alumno();
-
-                        a.APELLIDO = txtApellido.Text;
-                        a.CI = Convert.ToInt32(txtDocumento.Text);
-                        a.NOMBRE_USUARIO = txtUserName.Text;
-                        a.NOMBRE = txtNombre.Text;
-                        a.FOTO = Convert.ToString(a.CI) + "." + UCPicture.GetFileNameExtension;
-                        a.PASS = txtContraseña.Text;
-                        a.ACTIVO = true;
-
-                        //GUARDO LA FOTO EN UNA CARPETA
-                        //-----------------------------
-                        UCPicture.GuardarFotos(Convert.ToString(a.CI));
-
-                        if (update)
-                        {
-                            //lu.ModificarAlumno(a);
-                            sm.ModificarAlumno(a);
-                            lblInfo.Text = "Informacion actualizada";
-                            Response.Redirect("~/AdminDocente/ListarAlumnos.aspx",false);
-                        }
-                        else
-                        {
-                            //lu.NuevoAlumno(a);
-                            sm.NuevoAlumno(a);
-
-                            lblInfo.Text =
-                                "Sabelo!!, fuiste registrado. Valida tu usuario y password para ingresar al sistema";
-                            ClearForm();
-                        }
+                        //lu.ModificarAlumno(a);
+                        sm.ModificarAlumno(a);
+                        lblInfo.Text = "Informacion actualizada";
+                        Response.Redirect("~/AdminDocente/ListarAlumnos.aspx", false);
                     }
                     else
                     {
-                        lblInfo.Text = "Tipo de usuario a registrar/actualizar no valido";
+                        //lu.NuevoAlumno(a);
+                        sm.NuevoAlumno(a);
+
+                        lblInfo.Text =
+                            "Sabelo!!, fuiste registrado. Valida tu usuario y password para ingresar al sistema";
+                        ClearForm();
                     }
+                    //}
+                    //else
+                    //{
+                    //    lblInfo.Text = "Tipo de usuario a registrar/actualizar no valido";
+                    //}
                 }
                 else
                 {
@@ -200,22 +200,22 @@ namespace BiosWebMail.UserControls
             Registrar(false);
         }
 
-        protected void ddlRegistroComo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lblMaterias.Visible = ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE";
-            txtMateriasDesc.Visible = ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE";
-            RequiredFieldValidatorMaterias.Visible = ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE";
-            UCPicture.Visible = ddlRegistroComo.SelectedValue.ToUpper() != "DOCENTE";
-            lblUserPicture.Visible = ddlRegistroComo.SelectedValue.ToUpper() != "DOCENTE";
+        //protected void ddlRegistroComo_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    lblMaterias.Visible = ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE";
+        //    txtMateriasDesc.Visible = ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE";
+        //    RequiredFieldValidatorMaterias.Visible = ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE";
+        //    UCPicture.Visible = ddlRegistroComo.SelectedValue.ToUpper() != "DOCENTE";
+        //    lblUserPicture.Visible = ddlRegistroComo.SelectedValue.ToUpper() != "DOCENTE";
 
-        }
+        //}
 
 
         private void ClearForm()
         {
             txtUserName.Text = "";
             txtNombre.Text = "";
-            txtMateriasDesc.Text = "";
+            //txtMateriasDesc.Text = "";
             txtDocumento.Text = "";
             txtContraseña.Text = "";
             txtApellido.Text = "";

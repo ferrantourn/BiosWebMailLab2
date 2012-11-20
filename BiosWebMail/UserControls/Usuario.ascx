@@ -7,7 +7,7 @@
             (*) Indica un campo requerido
         </td>
     </tr>
-    <tr>
+    <%--<tr>
         <td style="width: 30%">
             <asp:Label runat="server" ID="lblRegistrarme" Text="Registrarme como:"></asp:Label>
         </td>
@@ -18,7 +18,7 @@
                 <asp:ListItem Text="Docente" Value="Docente"> </asp:ListItem>
             </asp:DropDownList>
         </td>
-    </tr>
+    </tr>--%>
     <tr>
         <td style="width: 30%">
             Nombre *
@@ -81,7 +81,7 @@
             <uc1:UserControlPicture ID="UCPicture" runat="server" />
         </td>
     </tr>
-    <tr>
+    <%--<tr>
         <td style="width: 30%">
             <asp:Label runat="server" Visible="false" ID="lblMaterias" Text="Materias"></asp:Label>
         </td>
@@ -95,7 +95,7 @@
                 ID="RegularExpressionValidatorMaterias" ValidationExpression="^([A-Za-z0-9]\s?)+([,]\s?([A-Za-z0-9]\s?)+)*$"
                 ControlToValidate="txtMateriasDesc" runat="server" ErrorMessage="Ingresa las materias separadas por ','. Te doy otra chance..."></asp:RegularExpressionValidator>
         </td>
-    </tr>
+    </tr>--%>
     <tr>
         <td>
         </td>

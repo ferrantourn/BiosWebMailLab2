@@ -15,37 +15,43 @@
                 <td style="background-image: url(Images/Tope.jpg); width: 800px; height: 100px">
                     <div style="float: right; color: White; margin: 10px 10px 10px 10px">
                         <asp:Panel ID="PanelLogin" runat="server" Height="80px" Width="275px">
-                            <table>
-                                <tr>
-                                    <td>
-                                        Usuario:
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtUsuario" Width="100px" runat="server"></asp:TextBox>
-                                        <asp:RequiredFieldValidator Font-Size="10px" ForeColor="Wheat" ID="RequiredFieldValidatorUserName"
-                                            runat="server" ErrorMessage="Ingresa Usuario" Display="Dynamic" ValidationGroup="GrupoLogin"
-                                            ControlToValidate="txtUsuario"></asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Contraseña:
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtPass" Width="100px" TextMode="Password" runat="server"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ForeColor="Wheat" Font-Size="10px" ID="RequiredFieldValidatorPassword"
-                                            runat="server" ErrorMessage="Ingresa Contraseña" Display="Dynamic" ValidationGroup="GrupoLogin"
-                                            ControlToValidate="txtPass"></asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Button ID="btnLogin" ValidationGroup="GrupoLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
-                                    </td>
-                                    <td>
-                                    </td>
-                                </tr>
-                            </table>
+                            <asp:Login ID="LoginUser" MembershipProvider="BiosMembershipProvider" runat="server" RenderOuterTable="false"
+                                FailureText="Su intento de log in no fue valido." 
+                                onloggingin="LoginUser_LoggingIn" LoginButtonText="Login" >
+                                <LayoutTemplate>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                Usuario:
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="UserName" Width="100px" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator Font-Size="10px" ForeColor="Wheat" ID="RequiredFieldValidatorUserName"
+                                                    runat="server" ErrorMessage="Ingresa Usuario" Display="Dynamic" ValidationGroup="GrupoLogin"
+                                                    ControlToValidate="UserName"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Contraseña:
+                                            </td>
+                                            <td>
+                                                <asp:TextBox ID="Password" Width="100px" TextMode="Password" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ForeColor="Wheat" Font-Size="10px" ID="RequiredFieldValidatorPassword"
+                                                    runat="server" ErrorMessage="Ingresa Contraseña" Display="Dynamic" ValidationGroup="GrupoLogin"
+                                                    ControlToValidate="Password"></asp:RequiredFieldValidator>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:Button ID="LoginButton" CommandName="Login" ValidationGroup="GrupoLogin" runat="server" Text="Login" />
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </LayoutTemplate>
+                            </asp:Login>
                         </asp:Panel>
                     </div>
                 </td>
