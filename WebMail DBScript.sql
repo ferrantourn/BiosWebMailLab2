@@ -130,7 +130,7 @@ begin tran
 commit tran
 GO
 
---ALTA ALUMNO
+--MODIFICAR ALUMNO
 create proc spModificarAlumno
 @Ci int,
 @NombreUsuario nvarchar(15),
@@ -279,25 +279,22 @@ end
 
 GO
 
---BAJA ALUMNO
-create proc spBajaAlumno
-@Ci int,
+--BAJA ALUMNO y CARPETA
+create proc spBajaCarpeta
 @NumeroCarpeta int
 as
 BEGIN
-if not exists(select * from Usuario where Usuario.Ci=@Ci)
-	begin
-		return -1   --Usuario no Existe
-	end
 begin tran
-
+--borro lógicamente los mails que estan en @NumeroCarpeta si ésta carpeta es del remitente.
+--Al borrarse una carpeta, cabe la chance de que los mails en ellas esten asociados a otra carpeta
+--ejemplo: la carpeta a borrar es de un destinatario y tiene un mail que tambien lo posee alguna carpeta del remitente
 	update Mail SET NumeroCarpetaR = null  where (NumeroCarpetaR = @NumeroCarpeta)
 	if @@error<>0
 	begin
     rollback tran
 		return -2
 	end 
-	
+--borro lógicamente los mails que estan en @NumeroCarpeta si ésta carpeta es del destinatario.
 	update Mail SET NumeroCarpetaD = null  where (NumeroCarpetaD = @NumeroCarpeta)
 	
 	if @@error<>0
@@ -306,7 +303,8 @@ begin tran
 		return -3 
 	end
 
-	--borramos los mails que no esten en ninguna carpeta
+	--ahora borramos de la tabla mails aquellos que no esten en ninguna carpeta, ni remitente ni destinatario
+	--no tendría sentido mantenerlos si no pertenecen a ninguna carpeta.
 
 	delete from Mail where (NumeroCarpetaD = null and NumeroCarpetaR = null)
 	
@@ -315,9 +313,29 @@ begin tran
     rollback tran
 		return -4
 	end
+--finalmente borramos la carpeta @NumeroCarpeta de la tabla carpeta:
+DELETE FROM Carpeta where NumeroCarpeta=@NumeroCarpeta
+	if @@error<>0
+	begin
+    rollback tran
+		return -5
+	end
 
-	DELETE FROM Carpeta where ci=@Ci
-	
+END
+
+GO
+
+--precondicion: alumno no tiene carpetas. (previamente se deberá dar de bajas todas las carpetas del alumno.)
+create proc spBajaAlumno
+@Ci int
+as
+BEGIN
+if not exists(select * from Usuario where Usuario.Ci=@Ci)
+	begin
+		return -1   --Usuario no Existe
+	end
+begin tran
+
 	delete from Alumno where Alumno.Ci = @Ci
 	if @@error<>0
 	begin
