@@ -102,44 +102,7 @@ namespace BiosWebMail.UserControls
                 {
                     //ILogicaUsuario lu = FabricaLogica.getLogicaUsuario();
                     ServiceWebMail sm = new ServiceWebMail();
-                    //if (ddlRegistroComo.SelectedValue.ToUpper() == "DOCENTE")
-                    //{
-                    //11192012
-                    //ESTA SECCION YA NO ES NECESARIA YA QUE EL DOCENTE SE DA DE ALTA EN LA APLICACION WINDOWS
-                    //----------------------------------------------------------------------------------------
-                    //Docente d;
-                    //if (update)
-                    //    d = (Docente)Session["EditarUsuario"];
-                    //else
-                    //    d = new Docente();
-
-                    //d.APELLIDO = txtApellido.Text;
-                    //d.CI = Convert.ToInt32(txtDocumento.Text);
-                    //d.NOMBRE_USUARIO = txtUserName.Text;
-                    //d.MATERIAS = txtMateriasDesc.Text.Split(',').ToList();
-                    //d.NOMBRE = txtNombre.Text;
-                    //d.PASS = txtContraseña.Text;
-
-                    //if (update)
-                    //{
-                    //    lu.ModificarDocente(d);
-
-                    //    lblInfo.Text =
-                    //        "Informacion actualizada";
-                    //    Response.Redirect("~/AdminDocente/ListarDocentes.aspx", false);
-
-                    //}
-                    //else
-                    //{
-                    //    lu.NuevoDocente(d);
-
-                    //    lblInfo.Text =
-                    //        "Impeca!!, fuiste registrado. Valida tu usuario y password para ingresar al sistema";
-                    //    ClearForm();
-                    //}
-                    //}
-                    //else if (ddlRegistroComo.SelectedValue.ToUpper() == "ALUMNO")
-                    //{
+                   
                     Alumno a;
                     if (update)
                         a = (Alumno)Session["EditarUsuario"];

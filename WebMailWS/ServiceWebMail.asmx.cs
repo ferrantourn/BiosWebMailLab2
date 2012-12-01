@@ -190,14 +190,12 @@ namespace WebMailWS
             List<Alumno> Lista = new List<Alumno>();
             Lista = le.ListarAlumnos();
             XmlDocument ArchivoRetornoXml = new XmlDocument();
-            int i = 0;
 
             XmlNode raiz = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "raiz", null);
 
             foreach(Alumno alu in Lista)
             {
                 XmlNode NuevoPadre = ArchivoRetornoXml.CreateNode(XmlNodeType.Element,"EstadisticaMail",null);
-                //XmlNode NuevoPadre = ArchivoRetornoXml.GetElementsByTagName("EstadisticaMail")[i];
 
                 XmlNode NombreUsuario = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "NombreUsuario",null);
                 NombreUsuario.InnerText = alu.NOMBRE_USUARIO;
@@ -213,8 +211,6 @@ namespace WebMailWS
                 NuevoPadre.AppendChild(CantidadRecibidos);
 
                 raiz.AppendChild(NuevoPadre);
-                i++;
-                
             }
             ArchivoRetornoXml.AppendChild(raiz);
             return ArchivoRetornoXml;

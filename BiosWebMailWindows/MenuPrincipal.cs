@@ -22,5 +22,19 @@ namespace BiosWebMailWindows
             Estadisticas formEstadisticas = new Estadisticas();
             formEstadisticas.Show();
         }
+
+        private void btnRegistroDocente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Registro regform = new Registro();
+                regform.Show();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }
