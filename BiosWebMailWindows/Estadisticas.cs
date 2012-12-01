@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using BiosWebMail.refServiceWebMail;
 
 namespace BiosWebMailWindows
 {
@@ -15,13 +10,27 @@ namespace BiosWebMailWindows
         {
             InitializeComponent();
 
-            
+
         }
 
         private void Estadisticas_Load(object sender, EventArgs e)
         {
 
-            this.reportViewer1.RefreshReport();
+            //this.reportViewer1.RefreshReport();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServiceWebMail sm = new ServiceWebMail();
+                sm.get
+            }
+            catch (Exception ex)
+            {
+
+                lblInfo.Text = ex.Message;
+            }
         }
     }
 }
