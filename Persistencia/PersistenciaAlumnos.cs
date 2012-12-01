@@ -408,7 +408,7 @@ namespace Persistencia
             List<Alumno> _listaAlumnos = new List<Alumno>();
 
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
-            SqlCommand cmd = Conexion.GetCommand("spListarEstadistica", conexion, CommandType.StoredProcedure);
+            SqlCommand cmd = Conexion.GetCommand("spListarAlumno", conexion, CommandType.StoredProcedure);
 
             SqlDataReader _Reader;
             try
