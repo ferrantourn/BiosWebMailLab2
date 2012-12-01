@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Web.Services;
 using Entidades;
 using Logica;
@@ -191,26 +192,31 @@ namespace WebMailWS
             XmlDocument ArchivoRetornoXml = new XmlDocument();
             int i = 0;
 
+            XmlNode raiz = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "raiz", null);
+
             foreach(Alumno alu in Lista)
             {
                 XmlNode NuevoPadre = ArchivoRetornoXml.CreateNode(XmlNodeType.Element,"EstadisticaMail",null);
-                XmlNode RoleHierarchyDetails = ArchivoRetornoXml.GetElementsByTagName("EstadisticaMail")[i];
+                //XmlNode NuevoPadre = ArchivoRetornoXml.GetElementsByTagName("EstadisticaMail")[i];
 
                 XmlNode NombreUsuario = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "NombreUsuario",null);
-                NuevoPadre.AppendChild(NombreUsuario);
                 NombreUsuario.InnerText = alu.NOMBRE_USUARIO;
+                NuevoPadre.AppendChild(NombreUsuario);
+
 
                 XmlNode CantidadEnviados = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "MailsRecibidos",null);
-                NuevoPadre.AppendChild(CantidadEnviados);
                 CantidadEnviados.InnerText = Convert.ToString(alu.CANTIDADENVIADOS);
+                NuevoPadre.AppendChild(CantidadEnviados);
 
                 XmlNode CantidadRecibidos = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "MailsEnviados", null);
-                NuevoPadre.AppendChild(CantidadRecibidos);
                 CantidadRecibidos.InnerText = Convert.ToString(alu.CANTIDADRECIBIDOS);
+                NuevoPadre.AppendChild(CantidadRecibidos);
 
+                raiz.AppendChild(NuevoPadre);
                 i++;
                 
             }
+            ArchivoRetornoXml.AppendChild(raiz);
             return ArchivoRetornoXml;
 
         }

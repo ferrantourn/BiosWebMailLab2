@@ -724,7 +724,7 @@ GO
 create procedure spListarAlumnos
 as
 begin
-select Usuario.* ,Alumno.Activo, Alumno.Foto FROM Usuario INNER JOIN Alumno ON Usuario.Ci = Alumno.Ci
+select Usuario.* ,Alumno.* FROM Usuario INNER JOIN Alumno ON Usuario.Ci = Alumno.Ci
 end
 
 GO

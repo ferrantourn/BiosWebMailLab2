@@ -70,8 +70,9 @@
             this.button4.TabIndex = 3;
             this.button4.Text = "Estadísticas";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // Menu
+            // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -81,7 +82,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.IsMdiContainer = true;
-            this.Name = "Menu";
+            this.Name = "MenuPrincipal";
             this.Text = "Menu";
             this.ResumeLayout(false);
 

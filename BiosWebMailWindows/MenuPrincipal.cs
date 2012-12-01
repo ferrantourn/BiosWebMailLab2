@@ -16,5 +16,11 @@ namespace BiosWebMailWindows
             formActivarCuenta.Show();
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Estadisticas formEstadisticas = new Estadisticas();
+            formEstadisticas.Show();
+        }
     }
 }
