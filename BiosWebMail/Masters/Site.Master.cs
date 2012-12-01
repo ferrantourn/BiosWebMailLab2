@@ -105,5 +105,10 @@ namespace BiosWebMail.Masters
                 lblError.Text = ex.Message;
             }
         }
+
+        protected void LoginButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

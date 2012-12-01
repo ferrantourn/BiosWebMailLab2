@@ -44,7 +44,8 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:Button ID="LoginButton" CommandName="Login" ValidationGroup="GrupoLogin" runat="server" Text="Login" />
+                                                <asp:Button ID="LoginButton" CommandName="Login" ValidationGroup="GrupoLogin" 
+                                                    runat="server" Text="Login" onclick="LoginButton_Click" />
                                             </td>
                                             <td>
                                             </td>
