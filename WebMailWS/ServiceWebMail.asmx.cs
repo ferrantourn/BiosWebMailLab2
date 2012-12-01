@@ -2,6 +2,8 @@
 using System.Web.Services;
 using Entidades;
 using Logica;
+using System.Xml;
+using System;
 
 
 namespace WebMailWS
@@ -181,10 +183,36 @@ namespace WebMailWS
         }
 
         [WebMethod]
-        public XmlDocument ListarEstadistica()
+        public XmlDocument ListarAlumnosXml()
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
-            return le.ListarEstadistica();
+            List<Alumno> Lista = new List<Alumno>();
+            Lista = le.ListarAlumnos();
+            XmlDocument ArchivoRetornoXml = new XmlDocument();
+            int i = 0;
+
+            foreach(Alumno alu in Lista)
+            {
+                XmlNode NuevoPadre = ArchivoRetornoXml.CreateNode(XmlNodeType.Element,"EstadisticaMail",null);
+                XmlNode RoleHierarchyDetails = ArchivoRetornoXml.GetElementsByTagName("EstadisticaMail")[i];
+
+                XmlNode NombreUsuario = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "NombreUsuario",null);
+                NuevoPadre.AppendChild(NombreUsuario);
+                NombreUsuario.InnerText = alu.NOMBRE_USUARIO;
+
+                XmlNode CantidadEnviados = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "MailsRecibidos",null);
+                NuevoPadre.AppendChild(CantidadEnviados);
+                CantidadEnviados.InnerText = Convert.ToString(alu.CANTIDADENVIADOS);
+
+                XmlNode CantidadRecibidos = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "MailsEnviados", null);
+                NuevoPadre.AppendChild(CantidadRecibidos);
+                CantidadRecibidos.InnerText = Convert.ToString(alu.CANTIDADRECIBIDOS);
+
+                i++;
+                
+            }
+            return ArchivoRetornoXml;
+
         }
 
 

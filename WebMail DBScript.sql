@@ -453,6 +453,8 @@ DECLARE @Contador int
 	set @Contador = (select Alumno.cantRecibidos from Alumno where Alumno.Ci = @CiD)
 	update Alumno set cantRecibidos = @Contador + 1 where Alumno.Ci = @CiD
 
+--En caso de eliminar mails, esto no debería afectar la estadística. 
+--Por ende estos atributos nunca se decrementan
 
 
 end
