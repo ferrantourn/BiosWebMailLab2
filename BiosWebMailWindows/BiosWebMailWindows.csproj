@@ -129,10 +129,9 @@
       <Project>{506F497B-6775-4F3E-B59A-2BEDB6BC8849}</Project>
       <Name>BiosWebMail</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebMailWS\WebMailWS.csproj">
-      <Project>{7845380F-D796-451E-AB38-49B35C1247BF}</Project>
-      <Name>WebMailWS</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
