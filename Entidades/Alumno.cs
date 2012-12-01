@@ -26,12 +26,25 @@ namespace Entidades
             get { return _activo; }
             set { _activo = value; }
         }
+        private int _cantidadEnviados;
+        public int CANTIDADENVIADOS
+        {
+            get { return _cantidadEnviados; }
+            set { _cantidadEnviados = value; }
+        }
+        private int _cantidadRecividos;
+        public int CANTIDADRECIBIDOS
+        {
+            get { return _cantidadRecividos; }
+            set { _cantidadRecividos = value; }
+        }
 
         public Alumno()
         {
+
         }
 
-        public Alumno(List<Carpeta> listaCarpetas, string foto, bool activo, int ci, string nombreUsuario, string nombre,
+        public Alumno(List<Carpeta> listaCarpetas, string foto, bool activo, int cantidadEnviados, int cantidadRecibidos, int ci, string nombreUsuario, string nombre,
             string apellido, string pass)
             : base(ci, nombreUsuario, nombre, apellido, pass)
         {
@@ -43,6 +56,8 @@ namespace Entidades
             NOMBRE = nombre;
             APELLIDO = apellido;
             PASS = pass;
+            CANTIDADENVIADOS = cantidadEnviados;
+            CANTIDADRECIBIDOS = cantidadRecibidos;
         }
     }
 }

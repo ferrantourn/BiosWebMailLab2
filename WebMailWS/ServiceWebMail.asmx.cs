@@ -181,6 +181,14 @@ namespace WebMailWS
         }
 
         [WebMethod]
+        public XmlDocument ListarEstadistica()
+        {
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            return le.ListarEstadistica();
+        }
+
+
+        [WebMethod]
         public void ActualizarStatusAlumno(Alumno a, bool setActiveStatus)
         {
             ILogicaUsuario le = FabricaLogica.getLogicaUsuario();

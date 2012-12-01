@@ -32,6 +32,8 @@ GO
 create table Alumno(Ci int primary key not null, 
 					Foto nvarchar(256),
 					Activo bit not null,
+					cantEnviados int not null,
+					cantRecibidos int not null,
 				    foreign key (Ci) references Usuario(Ci))
 GO
 
@@ -91,8 +93,8 @@ begin tran
 		return -2  --Si no se pudo insertar un Usuario--
 	end
 
-	insert into Alumno(Ci, Foto, Activo)
-			values(@Ci, @Foto, @Activo)
+	insert into Alumno(Ci, Foto, Activo, cantEnviados,cantRecibidos)
+			values(@Ci, @Foto, @Activo, 0, 0)
 
 	if @@error<>0
 	begin
@@ -440,9 +442,17 @@ CREATE PROC spNuevoEmail
 @Fecha as datetime
 as
 begin
+DECLARE @Contador int
 
-INSERT INTO Mail (CiR,NumeroCarpetaR,CiD,NumeroCarpetaD,Asunto,Cuerpo,Leido,Fecha)
+	INSERT INTO Mail (CiR,NumeroCarpetaR,CiD,NumeroCarpetaD,Asunto,Cuerpo,Leido,Fecha)
 			values (@ciR, @NumCarpetaR,@CiD,@NumCarpetaD,@Asunto,@Cuerpo,@Leido,@Fecha)
+	
+	SET @Contador = (select Alumno.cantEnviados from Alumno where Alumno.Ci = @CiR)
+	update Alumno set cantEnviados = @Contador + 1 where Alumno.Ci = @CiR
+	
+	set @Contador = (select Alumno.cantRecibidos from Alumno where Alumno.Ci = @CiD)
+	update Alumno set cantRecibidos = @Contador + 1 where Alumno.Ci = @CiD
+
 
 
 end
@@ -756,11 +766,4 @@ EXEC	spAltaAlumno
 		'Balciunas',
 		'111111',
 		'aplicaciones,basedatos'
-		
-		
-
-
-
-
-
-
+		GO

@@ -14,6 +14,14 @@ namespace BiosWebMailWindows
         public Estadisticas()
         {
             InitializeComponent();
+
+            
+        }
+
+        private void Estadisticas_Load(object sender, EventArgs e)
+        {
+
+            this.reportViewer1.RefreshReport();
         }
     }
 }

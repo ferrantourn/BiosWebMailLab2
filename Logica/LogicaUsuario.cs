@@ -172,6 +172,19 @@ namespace Logica
             }
 
         }
+        public XmlDocument ListarEstadistica()
+        {
+            try
+            {
+                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
+                return persAlumnos.ListarEstadistica();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
 
         public List<Docente> ListarDocentes()
         {

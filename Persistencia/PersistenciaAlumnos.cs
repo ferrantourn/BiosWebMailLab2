@@ -338,64 +338,7 @@ namespace Persistencia
             return u;
         }
 
-
-
-        public List<Alumno> ListarAlumno()
-        {
-            List<Alumno> _listaAlumnos = new List<Alumno>();
-
-            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
-            SqlCommand cmd = Conexion.GetCommand("spListarAlumnos", conexion, CommandType.StoredProcedure);
-
-            SqlDataReader _Reader;
-            try
-            {
-                conexion.Open();
-                cmd.ExecuteNonQuery();
-                _Reader = cmd.ExecuteReader();
-                int _ci;
-                string _nombreUsuario, _nombre, _apellido, _pass, _foto;
-                bool _activo;
-
-                while (_Reader.Read())
-                {
-                    _ci = (int)_Reader["Ci"];
-                    _nombreUsuario = (string)_Reader["NombreUsuario"];
-                    _nombre = (string)_Reader["Nombre"];
-                    _apellido = (string)_Reader["Apellido"];
-                    _pass = (string)_Reader["Pass"];
-                    _foto = (string)_Reader["Foto"];
-                    _activo = (bool)_Reader["Activo"];
-
-                    Alumno a = new Alumno
-                    {
-                        CI = _ci,
-                        NOMBRE_USUARIO = _nombreUsuario,
-                        PASS = _pass,
-                        NOMBRE = _nombre,
-                        FOTO = _foto,
-                        APELLIDO = _apellido,
-                        ACTIVO = _activo
-
-                    };
-
-                    _listaAlumnos.Add(a);
-                }
-                _Reader.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-
-            return _listaAlumnos;
-        }
-
-
+        
         /// <summary>
         /// LISTA LOS ALUMNOS DEL SISTEMA SIN ENVIOS DE EMAILS POR UN NUMERO DE DIAS DADO.
         /// </summary>
@@ -459,6 +402,65 @@ namespace Persistencia
             return _listaAlumnos;
         }
 
+
+        public List<Alumno> ListarAlumno()
+        {
+            List<Alumno> _listaAlumnos = new List<Alumno>();
+
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spListarEstadistica", conexion, CommandType.StoredProcedure);
+
+            SqlDataReader _Reader;
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+                _Reader = cmd.ExecuteReader();
+                int _ci, _cantidadEnviados, _cantidadRecibidos;
+                string _nombreUsuario, _nombre, _apellido, _pass, _foto;
+                bool _activo;
+
+                while (_Reader.Read())
+                {
+                    _ci = (int)_Reader["Ci"];
+                    _nombreUsuario = (string)_Reader["NombreUsuario"];
+                    _nombre = (string)_Reader["Nombre"];
+                    _apellido = (string)_Reader["Apellido"];
+                    _pass = (string)_Reader["Pass"];
+                    _foto = (string)_Reader["Foto"];
+                    _activo = (bool)_Reader["Activo"];
+                    _cantidadEnviados = (int)_Reader["cantEnviados"];
+                    _cantidadRecibidos = (int)_Reader["cantRecibidos"];
+
+                    Alumno a = new Alumno
+                    {
+                        CI = _ci,
+                        NOMBRE_USUARIO = _nombreUsuario,
+                        PASS = _pass,
+                        NOMBRE = _nombre,
+                        FOTO = _foto,
+                        APELLIDO = _apellido,
+                        ACTIVO = _activo,
+                        CANTIDADRECIBIDOS = _cantidadRecibidos,
+                        CANTIDADENVIADOS = _cantidadEnviados,
+
+                    };
+
+                    _listaAlumnos.Add(a);
+                }
+                _Reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return _listaAlumnos;
+        }
 
        /// <summary>
         /// ACTUALIZA EL STATUS DE ACTIVO DE UN ALUMNO 
