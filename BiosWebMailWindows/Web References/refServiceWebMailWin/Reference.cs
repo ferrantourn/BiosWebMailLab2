@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace BiosWebMail.refServiceWebMail {
+namespace BiosWebMailWindows.refServiceWebMailWin {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -83,7 +83,7 @@ namespace BiosWebMail.refServiceWebMail {
         
         /// <remarks/>
         public ServiceWebMail() {
-            this.Url = global::BiosWebMail.Properties.Settings.Default.BiosWebMail_refServiceWebMail_ServiceWebMail;
+            this.Url = global::BiosWebMailWindows.Properties.Settings.Default.BiosWebMailWindows_refServiceWebMailWin_ServiceWebMail;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

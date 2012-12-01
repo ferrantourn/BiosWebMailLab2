@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using BiosWebMail.refServiceWebMail;
-
+using System.Xml;
+using BiosWebMailWindows.refServiceWebMailWin;
 namespace BiosWebMailWindows
 {
     public partial class Estadisticas : Form
@@ -24,7 +24,8 @@ namespace BiosWebMailWindows
             try
             {
                 ServiceWebMail sm = new ServiceWebMail();
-                sm.get
+                XmlNode nodo = sm.ListarAlumnosXml();
+                //sm.get
             }
             catch (Exception ex)
             {

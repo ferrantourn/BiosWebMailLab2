@@ -469,7 +469,7 @@ namespace Persistencia
         public void ActualizarStatusAlumno(Alumno a)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
-            SqlCommand cmd = Conexion.GetCommand("spActualiarStatusAlumno", conexion, CommandType.StoredProcedure);
+            SqlCommand cmd = Conexion.GetCommand("spActualizarStatusAlumno", conexion, CommandType.StoredProcedure);
 
             SqlParameter _ci = new SqlParameter("@ci", a.CI);
             SqlParameter _statusAlumno = new SqlParameter("@SetStatus", a.ACTIVO);

@@ -34,14 +34,14 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.lblHeader = new System.Windows.Forms.Label();
             this.PanelUsuario = new System.Windows.Forms.Panel();
-            this.lblAlumno = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblNombreAlumno = new System.Windows.Forms.Label();
-            this.lblDocumento = new System.Windows.Forms.Label();
-            this.lblUserName = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.lblUserName = new System.Windows.Forms.Label();
+            this.lblDocumento = new System.Windows.Forms.Label();
+            this.lblNombreAlumno = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblAlumno = new System.Windows.Forms.Label();
             this.lblInfo = new System.Windows.Forms.Label();
             this.PanelUsuario.SuspendLayout();
             this.SuspendLayout();
@@ -107,34 +107,38 @@
             this.PanelUsuario.Name = "PanelUsuario";
             this.PanelUsuario.Size = new System.Drawing.Size(376, 180);
             this.PanelUsuario.TabIndex = 5;
-            //this.PanelUsuario.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // lblAlumno
+            // lblStatus
             // 
-            this.lblAlumno.AutoSize = true;
-            this.lblAlumno.Location = new System.Drawing.Point(3, 17);
-            this.lblAlumno.Name = "lblAlumno";
-            this.lblAlumno.Size = new System.Drawing.Size(91, 13);
-            this.lblAlumno.TabIndex = 0;
-            this.lblAlumno.Text = "Nombre Completo";
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(121, 105);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 13);
+            this.lblStatus.TabIndex = 7;
             // 
-            // label3
+            // lblUserName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Documento";
+            this.lblUserName.AutoSize = true;
+            this.lblUserName.Location = new System.Drawing.Point(121, 77);
+            this.lblUserName.Name = "lblUserName";
+            this.lblUserName.Size = new System.Drawing.Size(0, 13);
+            this.lblUserName.TabIndex = 6;
             // 
-            // label4
+            // lblDocumento
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 77);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Usuario";
+            this.lblDocumento.AutoSize = true;
+            this.lblDocumento.Location = new System.Drawing.Point(121, 48);
+            this.lblDocumento.Name = "lblDocumento";
+            this.lblDocumento.Size = new System.Drawing.Size(0, 13);
+            this.lblDocumento.TabIndex = 5;
+            // 
+            // lblNombreAlumno
+            // 
+            this.lblNombreAlumno.AutoSize = true;
+            this.lblNombreAlumno.Location = new System.Drawing.Point(121, 17);
+            this.lblNombreAlumno.Name = "lblNombreAlumno";
+            this.lblNombreAlumno.Size = new System.Drawing.Size(0, 13);
+            this.lblNombreAlumno.TabIndex = 4;
             // 
             // label2
             // 
@@ -145,37 +149,32 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Status";
             // 
-            // lblNombreAlumno
+            // label4
             // 
-            this.lblNombreAlumno.AutoSize = true;
-            this.lblNombreAlumno.Location = new System.Drawing.Point(121, 17);
-            this.lblNombreAlumno.Name = "lblNombreAlumno";
-            this.lblNombreAlumno.Size = new System.Drawing.Size(0, 13);
-            this.lblNombreAlumno.TabIndex = 4;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 77);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Usuario";
             // 
-            // lblDocumento
+            // label3
             // 
-            this.lblDocumento.AutoSize = true;
-            this.lblDocumento.Location = new System.Drawing.Point(121, 48);
-            this.lblDocumento.Name = "lblDocumento";
-            this.lblDocumento.Size = new System.Drawing.Size(0, 13);
-            this.lblDocumento.TabIndex = 5;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Documento";
             // 
-            // lblUserName
+            // lblAlumno
             // 
-            this.lblUserName.AutoSize = true;
-            this.lblUserName.Location = new System.Drawing.Point(121, 77);
-            this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(0, 13);
-            this.lblUserName.TabIndex = 6;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(121, 105);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(0, 13);
-            this.lblStatus.TabIndex = 7;
+            this.lblAlumno.AutoSize = true;
+            this.lblAlumno.Location = new System.Drawing.Point(3, 17);
+            this.lblAlumno.Name = "lblAlumno";
+            this.lblAlumno.Size = new System.Drawing.Size(91, 13);
+            this.lblAlumno.TabIndex = 0;
+            this.lblAlumno.Text = "Nombre Completo";
             // 
             // lblInfo
             // 
@@ -198,6 +197,7 @@
             this.Controls.Add(this.label1);
             this.Name = "ActivarCuenta";
             this.Text = "ActivarCuenta";
+            this.Load += new System.EventHandler(this.ActivarCuenta_Load);
             this.PanelUsuario.ResumeLayout(false);
             this.PanelUsuario.PerformLayout();
             this.ResumeLayout(false);
