@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Xml;
 using Entidades;
@@ -28,8 +27,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaDocentes persDocente = FabricaPersistencia.getPersistenciaDocentes();
-                return persDocente.BuscarDocente(d.NOMBRE_USUARIO);
+                ServicioRemoting.ServicioDocente _objServicioD = new ServicioRemoting.ServicioDocente();
+                return (_objServicioD.Buscar(d.NOMBRE_USUARIO));
             }
             catch (Exception ex)
             {
@@ -43,8 +42,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                return persAlumnos.BuscarAlumno(a.NOMBRE_USUARIO);
+                ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                return (_objServicioA.Buscar(a));
             }
             catch (Exception ex)
             {
@@ -56,8 +55,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                return persAlumnos.BuscarAlumno(Convert.ToInt32(ci));
+                 ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                 return (_objServicioA.Buscar(ci));
             }
             catch (Exception ex)
             {
@@ -74,8 +73,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                persAlumnos.ModificarAlumno(a);
+                ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                _objServicioA.ModificarAlumno(a);
             }
             catch (Exception ex)
             {
@@ -88,8 +87,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaDocentes persAlumnos = FabricaPersistencia.getPersistenciaDocentes();
-                persAlumnos.ModificarDocente(d);
+                ServicioRemoting.ServicioDocente _objServicioD = new ServicioRemoting.ServicioDocente();
+                _objServicioD.Modificar(d);
             }
             catch (Exception ex)
             {
@@ -101,8 +100,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                persAlumnos.NuevoAlumno(a);
+                ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                _objServicioA.AltaAlumno(a);
             }
             catch (Exception ex)
             {
@@ -114,8 +113,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaDocentes persDocentes = FabricaPersistencia.getPersistenciaDocentes();
-                persDocentes.NuevoDocente(d);
+                ServicioRemoting.ServicioDocente _objServicioD = new ServicioRemoting.ServicioDocente();
+                _objServicioD.Alta(d);
             }
             catch (Exception ex)
             {
@@ -127,16 +126,18 @@ namespace Logica
         {
             try
             {
-                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                Alumno a = persAlumnos.LoginAlumno(NombreUsuario, Pass);
+                ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                Entidades.Alumno a =_objServicioA.LoginAlumno(NombreUsuario, Pass);
                 if (a != null)
                 {
                     return a;
                 }
                 else
                 {
-                    IPersistenciaDocentes persDocentes = FabricaPersistencia.getPersistenciaDocentes();
-                    Docente d = persDocentes.LoginDocente(NombreUsuario, Pass);
+
+                    ServicioRemoting.ServicioDocente _objServicioD = new ServicioRemoting.ServicioDocente();
+                    Entidades.Docente d = _objServicioD.LoginDocente(NombreUsuario, Pass);
+
                     return d;
                 }
             }
@@ -150,8 +151,9 @@ namespace Logica
         {
             try
             {
-                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                return persAlumnos.ListarAlumnosSinMovimientos(NumeroDias);
+                ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                List<Entidades.Alumno> Lista = _objServicioA.ListarAlumnosSinMovimientos(NumeroDias);
+                return Lista;
             }
             catch (Exception ex)
             {
@@ -164,8 +166,9 @@ namespace Logica
         {
             try
             {
-                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
-                return persAlumnos.ListarAlumno();
+                ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                List<Entidades.Alumno> Lista = _objServicioA.Listar();
+                return Lista;
             }
             catch (Exception ex)
             {
@@ -179,8 +182,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaDocentes persDocentes = FabricaPersistencia.getPersistenciaDocentes();
-                return persDocentes.ListarDocentes();
+                ServicioRemoting.ServicioDocente _objServicioD = new ServicioRemoting.ServicioDocente();
+                return _objServicioD.Listar();
             }
             catch (Exception ex)
             {
@@ -198,9 +201,9 @@ namespace Logica
         {
             try
             {
-                IPersistenciaAlumnos persAlumnos = FabricaPersistencia.getPersistenciaAlumnos();
+                ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
                 a.ACTIVO = setActiveStatus;
-                persAlumnos.ActualizarStatusAlumno(a);
+                _objServicioA.ActualizarStatusAlumno(a);
             }
             catch (Exception ex)
             {

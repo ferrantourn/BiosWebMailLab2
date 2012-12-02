@@ -21,16 +21,16 @@ namespace ServicioRemoting
         }
 
         //operaciones
-        public NuevoEmail(Entidades.Email e)
+        public void NuevoEmail(Entidades.Email e)
         {
             unaPersistencia.NuevoEmail(e);
         }
 
-        public MoverEmail(Entidades.Email e, Entidades.Carpeta carpetaActual, Entidades.Carpeta carpetaDestino)
+        public void MoverEmail(Entidades.Email e, Entidades.Carpeta carpetaActual, Entidades.Carpeta carpetaDestino)
         {
             unaPersistencia.MoverEmail(e,carpetaActual,carpetaDestino);
         }
-        public MarcarEmailLeido(Entidades.Email e, Entidades.Carpeta carpeta)
+        public void MarcarEmailLeido(Entidades.Email e, Entidades.Carpeta carpeta)
         {
             unaPersistencia.MarcarEmailLeido(e,carpeta);
         }

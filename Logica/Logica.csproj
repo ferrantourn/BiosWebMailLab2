@@ -57,6 +57,10 @@
       <Project>{9B095355-CD5E-4879-A00C-6C382DB13524}</Project>
       <Name>Persistencia</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServicioRemoting\CommServicioRemoting.csproj">
+      <Project>{79ABC9C8-5158-4487-8334-6DD4058A7314}</Project>
+      <Name>CommServicioRemoting</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
