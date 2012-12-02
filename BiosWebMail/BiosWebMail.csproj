@@ -185,7 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminDocente\" />
-    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Controles\Controles.csproj">
