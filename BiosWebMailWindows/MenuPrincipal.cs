@@ -58,6 +58,12 @@ namespace BiosWebMailWindows
             formAlumnosSinMovs.Show();
         }
 
+        private void listadoDeDocentesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListadoDocentes listadoDocentesForm = new ListadoDocentes();
+            listadoDocentesForm.Show();
+        }
+
        
 
      

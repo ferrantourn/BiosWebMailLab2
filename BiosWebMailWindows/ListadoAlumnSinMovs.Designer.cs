@@ -34,13 +34,13 @@
             this.txtNumDias = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.UsersListRepeater = new System.Windows.Forms.DataGridView();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.errorProviderDias = new System.Windows.Forms.ErrorProvider(this.components);
             this.ColumnIdAlumno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDesactivar = new System.Windows.Forms.DataGridViewLinkColumn();
             this.ColumnNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.errorProviderDias = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.UsersListRepeater)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderDias)).BeginInit();
             this.SuspendLayout();
@@ -98,18 +98,6 @@
             this.UsersListRepeater.TabIndex = 4;
             this.UsersListRepeater.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.UsersListRepeater_CellClick);
             // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(17, 304);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 13);
-            this.lblInfo.TabIndex = 5;
-            // 
-            // errorProviderDias
-            // 
-            this.errorProviderDias.ContainerControl = this;
-            // 
             // ColumnIdAlumno
             // 
             this.ColumnIdAlumno.HeaderText = "ColumnIdAlumno";
@@ -136,6 +124,18 @@
             this.ColumnStatus.HeaderText = "Estado";
             this.ColumnStatus.Name = "ColumnStatus";
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(17, 304);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 5;
+            // 
+            // errorProviderDias
+            // 
+            this.errorProviderDias.ContainerControl = this;
+            // 
             // ListadoAlumnSinMovs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -149,6 +149,7 @@
             this.Controls.Add(this.lblHeader);
             this.Name = "ListadoAlumnSinMovs";
             this.Text = "Listado";
+            this.Load += new System.EventHandler(this.ListadoAlumnSinMovs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.UsersListRepeater)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderDias)).EndInit();
             this.ResumeLayout(false);

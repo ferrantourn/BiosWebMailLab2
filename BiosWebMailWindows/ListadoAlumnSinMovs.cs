@@ -11,6 +11,11 @@ namespace BiosWebMailWindows
             InitializeComponent();
         }
 
+        private void ListadoAlumnSinMovs_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Busqueda()
         {
             try
@@ -79,5 +84,7 @@ namespace BiosWebMailWindows
                 lblInfo.Text = ex.Message;
             }
         }
+
+        
     }
 }

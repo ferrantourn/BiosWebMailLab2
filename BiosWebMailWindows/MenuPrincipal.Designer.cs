@@ -36,6 +36,7 @@
             this.activarCuentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.docentesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarDocenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeDocentesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +93,8 @@
             // docentesToolStripMenuItem
             // 
             this.docentesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarDocenteToolStripMenuItem});
+            this.registrarDocenteToolStripMenuItem,
+            this.listadoDeDocentesToolStripMenuItem});
             this.docentesToolStripMenuItem.Name = "docentesToolStripMenuItem";
             this.docentesToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.docentesToolStripMenuItem.Text = "Docentes";
@@ -100,9 +102,16 @@
             // registrarDocenteToolStripMenuItem
             // 
             this.registrarDocenteToolStripMenuItem.Name = "registrarDocenteToolStripMenuItem";
-            this.registrarDocenteToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.registrarDocenteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.registrarDocenteToolStripMenuItem.Text = "Registrar Docente";
             this.registrarDocenteToolStripMenuItem.Click += new System.EventHandler(this.registrarDocenteToolStripMenuItem_Click);
+            // 
+            // listadoDeDocentesToolStripMenuItem
+            // 
+            this.listadoDeDocentesToolStripMenuItem.Name = "listadoDeDocentesToolStripMenuItem";
+            this.listadoDeDocentesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.listadoDeDocentesToolStripMenuItem.Text = "Listado de Docentes";
+            this.listadoDeDocentesToolStripMenuItem.Click += new System.EventHandler(this.listadoDeDocentesToolStripMenuItem_Click);
             // 
             // MenuPrincipal
             // 
@@ -132,5 +141,6 @@
         private System.Windows.Forms.ToolStripMenuItem docentesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registrarDocenteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem activarCuentaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoDeDocentesToolStripMenuItem;
     }
 }

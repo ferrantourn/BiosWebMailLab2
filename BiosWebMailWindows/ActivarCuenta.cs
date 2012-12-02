@@ -48,7 +48,13 @@ namespace BiosWebMailWindows
                     else
                     {
                         PanelUsuario.Visible = false;
+                        MessageBox.Show("No se encontro el usuario.", "Usuario no encontrado", MessageBoxButtons.OK,
+                                        MessageBoxIcon.Exclamation);
                     }
+                }
+                else
+                {
+                    lblInfo.Text = "El documento ingresado no es valido";
                 }
             }
             catch (Exception ex)
@@ -64,16 +70,22 @@ namespace BiosWebMailWindows
             try
             {
                 lblInfo.Text = "";
-                ServiceWebMail sm = new ServiceWebMail();
 
-                //ACTIVAMOS EL USUARIO
-                int ci;
-                if (Int32.TryParse(txtDocumento.Text, out ci))
+                if (MessageBox.Show("Realmente desea activar este usuario?", "Activacion de Usuario",
+                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    Alumno a = new Alumno { CI = ci };
-                    sm.ActualizarStatusAlumno(a, true);
-                    lblStatus.Text = "Activo";
-                    lblInfo.Text = "Alumno activado!";
+                    ServiceWebMail sm = new ServiceWebMail();
+
+                    //ACTIVAMOS EL USUARIO
+                    int ci;
+                    if (Int32.TryParse(txtDocumento.Text, out ci))
+                    {
+                        Alumno a = new Alumno { CI = ci };
+                        sm.ActualizarStatusAlumno(a, true);
+                        lblStatus.Text = "Activo";
+                        lblInfo.Text = "Alumno activado!";
+                        btnActivar.Enabled = false;
+                    }
                 }
             }
             catch (Exception ex)

@@ -74,6 +74,12 @@
     <Compile Include="ListadoAlumnSinMovs.Designer.cs">
       <DependentUpon>ListadoAlumnSinMovs.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListadoDocentes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoDocentes.Designer.cs">
+      <DependentUpon>ListadoDocentes.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoAlumnSinMovs.resx">
       <DependentUpon>ListadoAlumnSinMovs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoDocentes.resx">
+      <DependentUpon>ListadoDocentes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
@@ -172,6 +181,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\refServiceWebMailWin\ServiceWebMail.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Controles\Controles.csproj">
+      <Project>{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}</Project>
+      <Name>Controles</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
