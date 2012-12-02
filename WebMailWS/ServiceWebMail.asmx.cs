@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Services;
+using System.Web.Services.Protocols;
 using Entidades;
 using Logica;
 using System.Xml;
 using System;
-
+using ExcepcionesPersonalizadas;
 
 namespace WebMailWS
 {
@@ -157,8 +158,19 @@ namespace WebMailWS
         [WebMethod]
         public Usuario getLoginUsuario(string userName, string pass)
         {
-            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
-            return le.getLoginUsuario(userName, pass);
+            try
+            {
+                ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+                return le.getLoginUsuario(userName, pass);
+            }
+            catch (ErrorAlumnoBloqueado exal)
+            {
+                throw new SoapException(exal.Message,SoapException.ClientFaultCode,exal.Message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [WebMethod]
@@ -193,16 +205,16 @@ namespace WebMailWS
 
             XmlNode raiz = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "raiz", null);
 
-            foreach(Alumno alu in Lista)
+            foreach (Alumno alu in Lista)
             {
-                XmlNode NuevoPadre = ArchivoRetornoXml.CreateNode(XmlNodeType.Element,"EstadisticaMail",null);
+                XmlNode NuevoPadre = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "EstadisticaMail", null);
 
-                XmlNode NombreUsuario = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "NombreUsuario",null);
+                XmlNode NombreUsuario = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "NombreUsuario", null);
                 NombreUsuario.InnerText = alu.NOMBRE_USUARIO;
                 NuevoPadre.AppendChild(NombreUsuario);
 
 
-                XmlNode CantidadEnviados = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "MailsRecibidos",null);
+                XmlNode CantidadEnviados = ArchivoRetornoXml.CreateNode(XmlNodeType.Element, "MailsRecibidos", null);
                 CantidadEnviados.InnerText = Convert.ToString(alu.CANTIDADENVIADOS);
                 NuevoPadre.AppendChild(CantidadEnviados);
 

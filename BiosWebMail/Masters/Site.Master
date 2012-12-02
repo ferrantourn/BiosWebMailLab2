@@ -15,7 +15,7 @@
                 <td style="background-image: url(Images/Tope.jpg); width: 800px; height: 100px">
                     <div style="float: right; color: White; margin: 10px 10px 10px 10px">
                         <asp:Panel ID="PanelLogin" runat="server" Height="80px" Width="275px">
-                            <asp:Login ID="LoginUser" MembershipProvider="BiosMembershipProvider" runat="server" RenderOuterTable="false"
+                            <asp:Login ID="LoginUser"  runat="server" RenderOuterTable="false"
                                 FailureText="Su intento de log in no fue valido." 
                                 onloggingin="LoginUser_LoggingIn" LoginButtonText="Login" >
                                 <LayoutTemplate>

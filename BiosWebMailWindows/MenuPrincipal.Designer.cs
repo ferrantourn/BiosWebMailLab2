@@ -28,84 +28,109 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.btnRegistroDocente = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.alumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoAlumnosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alumnosSinMovimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estadisticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activarCuentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.docentesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarDocenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // menuStrip1
             // 
-            this.button1.Location = new System.Drawing.Point(43, 35);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(145, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Listado de Alumnos";
-            this.button1.UseVisualStyleBackColor = true;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alumnosToolStripMenuItem,
+            this.docentesToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(532, 24);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // button2
+            // alumnosToolStripMenuItem
             // 
-            this.button2.Location = new System.Drawing.Point(43, 64);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(145, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Alumnos sin Movimientos";
-            this.button2.UseVisualStyleBackColor = true;
+            this.alumnosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listadoAlumnosToolStripMenuItem,
+            this.alumnosSinMovimientosToolStripMenuItem,
+            this.estadisticasToolStripMenuItem,
+            this.activarCuentaToolStripMenuItem});
+            this.alumnosToolStripMenuItem.Name = "alumnosToolStripMenuItem";
+            this.alumnosToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.alumnosToolStripMenuItem.Text = "Alumnos";
             // 
-            // button3
+            // listadoAlumnosToolStripMenuItem
             // 
-            this.button3.Location = new System.Drawing.Point(43, 93);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(145, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Activar cuenta de usuario";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.listadoAlumnosToolStripMenuItem.Name = "listadoAlumnosToolStripMenuItem";
+            this.listadoAlumnosToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.listadoAlumnosToolStripMenuItem.Text = "Listado alumnos";
+            this.listadoAlumnosToolStripMenuItem.Click += new System.EventHandler(this.listadoAlumnosToolStripMenuItem_Click);
             // 
-            // button4
+            // alumnosSinMovimientosToolStripMenuItem
             // 
-            this.button4.Location = new System.Drawing.Point(43, 122);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(145, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Estadísticas";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.alumnosSinMovimientosToolStripMenuItem.Name = "alumnosSinMovimientosToolStripMenuItem";
+            this.alumnosSinMovimientosToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.alumnosSinMovimientosToolStripMenuItem.Text = "Alumnos sin movimientos";
+            this.alumnosSinMovimientosToolStripMenuItem.Click += new System.EventHandler(this.alumnosSinMovimientosToolStripMenuItem_Click);
             // 
-            // btnRegistroDocente
+            // estadisticasToolStripMenuItem
             // 
-            this.btnRegistroDocente.Location = new System.Drawing.Point(43, 151);
-            this.btnRegistroDocente.Name = "btnRegistroDocente";
-            this.btnRegistroDocente.Size = new System.Drawing.Size(145, 23);
-            this.btnRegistroDocente.TabIndex = 5;
-            this.btnRegistroDocente.Text = "Registrar nuevo docente";
-            this.btnRegistroDocente.UseVisualStyleBackColor = true;
-            this.btnRegistroDocente.Click += new System.EventHandler(this.btnRegistroDocente_Click);
+            this.estadisticasToolStripMenuItem.Name = "estadisticasToolStripMenuItem";
+            this.estadisticasToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.estadisticasToolStripMenuItem.Text = "Estadisticas";
+            this.estadisticasToolStripMenuItem.Click += new System.EventHandler(this.estadisticasToolStripMenuItem_Click);
+            // 
+            // activarCuentaToolStripMenuItem
+            // 
+            this.activarCuentaToolStripMenuItem.Name = "activarCuentaToolStripMenuItem";
+            this.activarCuentaToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.activarCuentaToolStripMenuItem.Text = "Activar Cuenta";
+            this.activarCuentaToolStripMenuItem.Click += new System.EventHandler(this.activarCuentaToolStripMenuItem_Click);
+            // 
+            // docentesToolStripMenuItem
+            // 
+            this.docentesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registrarDocenteToolStripMenuItem});
+            this.docentesToolStripMenuItem.Name = "docentesToolStripMenuItem";
+            this.docentesToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.docentesToolStripMenuItem.Text = "Docentes";
+            // 
+            // registrarDocenteToolStripMenuItem
+            // 
+            this.registrarDocenteToolStripMenuItem.Name = "registrarDocenteToolStripMenuItem";
+            this.registrarDocenteToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.registrarDocenteToolStripMenuItem.Text = "Registrar Docente";
+            this.registrarDocenteToolStripMenuItem.Click += new System.EventHandler(this.registrarDocenteToolStripMenuItem_Click);
             // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(532, 259);
-            this.Controls.Add(this.btnRegistroDocente);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MenuPrincipal";
-            this.Text = "Menu";
+            this.Text = "Administracion Docente";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button btnRegistroDocente;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem alumnosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listadoAlumnosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alumnosSinMovimientosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estadisticasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem docentesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registrarDocenteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem activarCuentaToolStripMenuItem;
     }
 }

@@ -10,20 +10,27 @@ namespace BiosWebMailWindows
             InitializeComponent();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+       
+
+       
+
+        private void btnRegistroDocente_Click(object sender, EventArgs e)
         {
-            ActivarCuenta formActivarCuenta = new ActivarCuenta();
-            formActivarCuenta.Show();
+           
+        }
+
+        private void listadoAlumnosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void estadisticasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Estadisticas formEstadisticas = new Estadisticas();
             formEstadisticas.Show();
         }
 
-        private void btnRegistroDocente_Click(object sender, EventArgs e)
+        private void registrarDocenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -32,9 +39,29 @@ namespace BiosWebMailWindows
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
+
+          
         }
+
+        private void activarCuentaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ActivarCuenta formActivarCuenta = new ActivarCuenta();
+            formActivarCuenta.Show();
+        }
+
+        private void alumnosSinMovimientosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListadoAlumnSinMovs formAlumnosSinMovs = new ListadoAlumnSinMovs();
+            formAlumnosSinMovs.Show();
+        }
+
+       
+
+     
+
+       
     }
 }

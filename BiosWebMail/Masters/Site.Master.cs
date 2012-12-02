@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Protocols;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 //using Entidades;
@@ -37,37 +38,37 @@ namespace BiosWebMail.Masters
 
         //protected void btnLogin_Click(object sender, EventArgs e)
         //{
-            //try
-            //{
-            //    //ILogicaUsuario LogicaUsuario = FabricaLogica.getLogicaUsuario();
-            //    ServiceWebMail sm = new ServiceWebMail();
-            //    //Usuario NuevoUsuario = LogicaUsuario.getLoginUsuario(txtUsuario.Text, txtPass.Text);
-            //    Usuario NuevoUsuario = sm.getLoginUsuario(txtUsuario.Text, txtPass.Text);
+        //try
+        //{
+        //    //ILogicaUsuario LogicaUsuario = FabricaLogica.getLogicaUsuario();
+        //    ServiceWebMail sm = new ServiceWebMail();
+        //    //Usuario NuevoUsuario = LogicaUsuario.getLoginUsuario(txtUsuario.Text, txtPass.Text);
+        //    Usuario NuevoUsuario = sm.getLoginUsuario(txtUsuario.Text, txtPass.Text);
 
-            //    USUARIO_LOGUEADO = NuevoUsuario;
-            //    if (NuevoUsuario != null)
-            //    {
-            //        if (NuevoUsuario is Alumno)
-            //            Response.Redirect("~/AdminAlumno/home.aspx");
-            //        else if (NuevoUsuario is Docente) Response.Redirect("~/AdminDocente/HomeDocente.aspx");
-            //    }
-            //    else
-            //    {
-            //        lblError.Text = "El usuario o contraseña ingresados no son validos. Media pila! ...";
-            //    }
-            //}
-            ////catch (ErrorAlumnoBloqueado ex)
-            ////{
-            ////    lblError.Text =  ex.Message;
-            ////}
-            ////catch (ErrorUsuarioContraseñaIncorrecto ex)
-            ////{
-            ////    lblError.Text = ex.ToString();
-            ////}
-            //catch (Exception ex)
-            //{
-            //    lblError.Text = ex.Message;
-            //}
+        //    USUARIO_LOGUEADO = NuevoUsuario;
+        //    if (NuevoUsuario != null)
+        //    {
+        //        if (NuevoUsuario is Alumno)
+        //            Response.Redirect("~/AdminAlumno/home.aspx");
+        //        else if (NuevoUsuario is Docente) Response.Redirect("~/AdminDocente/HomeDocente.aspx");
+        //    }
+        //    else
+        //    {
+        //        lblError.Text = "El usuario o contraseña ingresados no son validos. Media pila! ...";
+        //    }
+        //}
+        ////catch (ErrorAlumnoBloqueado ex)
+        ////{
+        ////    lblError.Text =  ex.Message;
+        ////}
+        ////catch (ErrorUsuarioContraseñaIncorrecto ex)
+        ////{
+        ////    lblError.Text = ex.ToString();
+        ////}
+        //catch (Exception ex)
+        //{
+        //    lblError.Text = ex.Message;
+        //}
 
         //}
 
@@ -85,7 +86,7 @@ namespace BiosWebMail.Masters
                 {
                     if (NuevoUsuario is Alumno)
                         Response.Redirect("~/AdminAlumno/home.aspx");
-                    else if (NuevoUsuario is Docente) Response.Redirect("~/AdminDocente/HomeDocente.aspx");
+                    //else if (NuevoUsuario is Docente) Response.Redirect("~/AdminDocente/HomeDocente.aspx");
                 }
                 else
                 {
@@ -94,14 +95,19 @@ namespace BiosWebMail.Masters
             }
             //catch (ErrorAlumnoBloqueado ex)
             //{
-            //    lblError.Text =  ex.Message;
+            //    lblError.Text = ex.Message;
             //}
             //catch (ErrorUsuarioContraseñaIncorrecto ex)
             //{
             //    lblError.Text = ex.ToString();
             //}
+            catch (SoapException exsoap)
+            {
+                lblError.Text = !string.IsNullOrEmpty(exsoap.Actor) ? exsoap.Actor : exsoap.Message;
+            }
             catch (Exception ex)
             {
+
                 lblError.Text = ex.Message;
             }
         }

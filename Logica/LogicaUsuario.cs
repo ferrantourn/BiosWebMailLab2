@@ -135,7 +135,6 @@ namespace Logica
                 }
                 else
                 {
-
                     IPersistenciaDocentes persDocentes = FabricaPersistencia.getPersistenciaDocentes();
                     Docente d = persDocentes.LoginDocente(NombreUsuario, Pass);
                     return d;
