@@ -50,7 +50,7 @@ namespace ServicioRemoting
         {
             return unaPersistencia.GetEmail(e);
         }
-        public void EliminarMail(Entidades.Email e, Entidades.Carpeta carpeta)
+        public void EliminarEmail(Entidades.Email e, Entidades.Carpeta carpeta)
         {
             unaPersistencia.EliminarEmail(e, carpeta);
         }

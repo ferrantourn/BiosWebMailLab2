@@ -24,7 +24,7 @@ namespace Logica
 
             try
             {
-                IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
+                ServicioRemoting.ServicioCarpeta _objServicioC = new ServicioRemoting.ServicioCarpeta();
                 if (c.NOMBRE_CARPETA.ToUpper() == "INBOX" ||
                     c.NOMBRE_CARPETA.ToUpper() == "PAPELERA" ||
                     c.NOMBRE_CARPETA.ToUpper() == "ENVIADOS")
@@ -33,11 +33,10 @@ namespace Logica
                 }
 
                 //si el nombre de la carpeta no es ninguno por defecto del sistema la podemos ingreasr
-                pc.NuevaCarpeta(c);
+                _objServicioC.NuevaCarpeta(c);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
 
@@ -48,8 +47,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
-                return pc.ListarCarpetasAlumno(a);
+                ServicioRemoting.ServicioCarpeta _objServicioC = new ServicioRemoting.ServicioCarpeta();
+                return _objServicioC.ListarCarpetasAlumno(a);
             }
             catch (Exception ex)
             {
@@ -64,12 +63,11 @@ namespace Logica
         {
             try
             {
-                IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
-                pc.EliminarCarpeta(c);
+                ServicioRemoting.ServicioCarpeta _objServicioC = new ServicioRemoting.ServicioCarpeta();
+                _objServicioC.EliminarCarpeta(c);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
 
@@ -83,9 +81,9 @@ namespace Logica
         {
             try
             {
-                IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
+                ServicioRemoting.ServicioCarpeta _objServicioC = new ServicioRemoting.ServicioCarpeta();
                 Carpeta c = new Carpeta {USUARIO = a, NOMBRE_CARPETA = "Inbox"};
-                return pc.BuscarCarpetaSistemaAlumno(c);
+                return _objServicioC.BuscarCarpetaSistemaAlumno(c);
             }
             catch (Exception ex)
             {
@@ -100,9 +98,9 @@ namespace Logica
         {
             try
             {
-                IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
+                ServicioRemoting.ServicioCarpeta _objServicioC = new ServicioRemoting.ServicioCarpeta();
                 Carpeta c = new Carpeta { USUARIO = a, NOMBRE_CARPETA = "Enviados" };
-                return pc.BuscarCarpetaSistemaAlumno(c);
+                return _objServicioC.BuscarCarpetaSistemaAlumno(c);
             }
             catch (Exception ex)
             {
@@ -134,8 +132,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
-                return pc.BuscarCarpetaAlumno(c);
+                ServicioRemoting.ServicioCarpeta _objServicioC = new ServicioRemoting.ServicioCarpeta();
+                return _objServicioC.BuscarCarpetaAlumno(c);
             }
             catch (Exception ex)
             {

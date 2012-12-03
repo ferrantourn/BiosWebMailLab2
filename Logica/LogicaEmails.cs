@@ -27,10 +27,11 @@ namespace Logica
             {
                 //PRIMERO VALIDAMOS QUE EL DESTINATARIO EXISTA
                 //--------------------------------------------
-                LogicaUsuario lusuario = LogicaUsuario.GetInstancia();
+                ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                
                 //OBTENERMOS EL USUARIO DESTINATARIO
                 //destinatario = lusuario.getAlumno(destinatario.NOMBRE_USUARIO);
-                destinatario = lusuario.getAlumno(destinatario);
+                destinatario = _objServicioA.Buscar(destinatario);
                 if (destinatario != null)
                 {
                     //OBTENGO LA CARPETA INBOX POR DEFECTO DEL DESTINATARIO
@@ -45,11 +46,11 @@ namespace Logica
                     //Email e = new Email(null, asunto, false, cuerpo, SentFolder, InboxDest, DateTime.Now);
                     newEmail.CARPETA_DESTINATARIO = InboxDest;
                     newEmail.CARPETA_REMITENTE = SentFolder;
-                    IPersistenciaEmails persEmails = FabricaPersistencia.getPersistenciaEmails();
+                    ServicioRemoting.ServicioEmails _objServicioE = new ServicioRemoting.ServicioEmails();
 
                     //GUARDAMOS EL NUEVO EMAIL EN LA BASE DE DATOS
                     //--------------------------------------------
-                    persEmails.NuevoEmail(newEmail);
+                    _objServicioE.NuevoEmail(newEmail);
                 }
                 else
                     //CREAR EXCEPCION PERSONALIZADA AQUI!! ***********************************
@@ -67,7 +68,7 @@ namespace Logica
         {
             try
             {
-                IPersistenciaEmails pe = FabricaPersistencia.getPersistenciaEmails();
+                ServicioRemoting.ServicioEmails _objServicioE = new ServicioRemoting.ServicioEmails();
 
                 ILogicaCarpetas lc = FabricaLogica.getLogicaCarpetas();
                 //Carpeta c = lc.GetCarpeta(numeroCarpeta, ci);
@@ -78,15 +79,15 @@ namespace Logica
                 {
                     if (c.NOMBRE_CARPETA.ToUpper() == "ENVIADOS")
                     {
-                        emails = pe.ListarEmailsEnviados(carpeta);
+                        emails = _objServicioE.ListarEmailsEnviados(carpeta);
                     }
                     else if (c.NOMBRE_CARPETA.ToUpper() == "INBOX")
                     {
-                        emails = pe.ListarEmailsRecibidos(carpeta);
+                        emails = _objServicioE.ListarEmailsRecibidos(carpeta);
                     }
                     else
                     {
-                        emails = pe.ListarEmails(carpeta);
+                        emails = _objServicioE.ListarEmails(carpeta);
                     }
 
                     return emails;
@@ -115,7 +116,7 @@ namespace Logica
         {
             try
             {
-                IPersistenciaEmails pe = FabricaPersistencia.getPersistenciaEmails();
+                ServicioRemoting.ServicioEmails _objServicioE = new ServicioRemoting.ServicioEmails();
                 IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
                 //Carpeta c = pc.BuscarCarpetaAlumno(ciAlumno, NumeroCarpeta);
                 Carpeta c = pc.BuscarCarpetaAlumno(carpeta);
@@ -128,7 +129,7 @@ namespace Logica
                     if (papelera != null)
                     {
                         //pe.MoverEmail(numeroEmail, NumeroCarpeta, papelera.NUMERO_CARPETA);
-                        pe.MoverEmail(e, carpeta, papelera);
+                        _objServicioE.MoverEmail(e, carpeta, papelera);
 
                     }
                     else
@@ -139,7 +140,7 @@ namespace Logica
                 else
                 {
                     //pe.EliminarEmail(numeroEmail, NumeroCarpeta);
-                    pe.EliminarEmail(e, carpeta);
+                    _objServicioE.EliminarEmail(e, carpeta);
 
                 }
             }
@@ -155,8 +156,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaEmails pe = FabricaPersistencia.getPersistenciaEmails();
-                return pe.GetEmail(e);
+                ServicioRemoting.ServicioEmails _objServicioE = new ServicioRemoting.ServicioEmails();
+                return _objServicioE.GetEmail(e);
             }
             catch (Exception ex)
             {
@@ -169,9 +170,9 @@ namespace Logica
         {
             try
             {
-                IPersistenciaEmails pe = FabricaPersistencia.getPersistenciaEmails();
+                ServicioRemoting.ServicioEmails _objServicioE = new ServicioRemoting.ServicioEmails();
 
-                pe.MarcarEmailLeido(e, c);
+                _objServicioE.MarcarEmailLeido(e, c);
             }
             catch (Exception ex)
             {
@@ -184,8 +185,8 @@ namespace Logica
         {
             try
             {
-                IPersistenciaEmails pe = FabricaPersistencia.getPersistenciaEmails();
-                pe.MoverEmail(e, carpetaActual, carpetaDestino);
+                ServicioRemoting.ServicioEmails _objServicioE = new ServicioRemoting.ServicioEmails();
+                _objServicioE.MoverEmail(e, carpetaActual, carpetaDestino);
             }
             catch (Exception ex)
             {

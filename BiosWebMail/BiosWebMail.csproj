@@ -88,17 +88,17 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\refServiceWebMail\ServiceWebMail.disco" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <None Include="Web References\refServiceWebMail\ServiceWebMail.wsdl" />
     <None Include="Web References\refServiceWebMail\Usuario.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <Content Include="web.config" />
+    <Content Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </Content>
+    <Content Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDenegado.aspx.cs">
