@@ -16,7 +16,7 @@ namespace ServicioRemoting
         {
             unCanal = new TcpChannel();
             ChannelServices.RegisterChannel(unCanal, false);
-            RemotingConfiguration.RegisterWellKnownClientType(typeof(Persistencia.FabricaPersistencia), "tcp://localhost:8989/FabricaPersistencia.remota");
+            RemotingConfiguration.RegisterWellKnownClientType(typeof(Persistencia.FabricaPersistencia), "tcp://192.168.0.15:8989/FabricaPersistencia.remota");
         }
 
         public static void CreoServicio()

@@ -9,7 +9,7 @@ using ExcepcionesPersonalizadas;
 namespace Persistencia
 {
 
-    internal class PersistenciaDocentes : IPersistenciaDocentes
+    internal class PersistenciaDocentes : MarshalByRefObject, IPersistenciaDocentes
     {
         //singleton
 

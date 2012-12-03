@@ -53,10 +53,6 @@
       <Project>{5206827F-CEB2-4DD4-A434-8186923BB3D0}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Persistencia\Persistencia.csproj">
-      <Project>{9B095355-CD5E-4879-A00C-6C382DB13524}</Project>
-      <Name>Persistencia</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ServicioRemoting\CommServicioRemoting.csproj">
       <Project>{79ABC9C8-5158-4487-8334-6DD4058A7314}</Project>
       <Name>CommServicioRemoting</Name>

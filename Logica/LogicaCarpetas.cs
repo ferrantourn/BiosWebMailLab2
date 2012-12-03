@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entidades;
-using Persistencia;
 
 namespace Logica
 {

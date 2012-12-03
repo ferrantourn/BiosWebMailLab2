@@ -1,8 +1,12 @@
-﻿
+﻿using System;
+
 namespace Persistencia
 {
-    public class FabricaPersistencia
+    public class FabricaPersistencia : MarshalByRefObject
     {
+        public FabricaPersistencia()
+        {
+        }
 
         public static IPersistenciaDocentes getPersistenciaDocentes()
         {

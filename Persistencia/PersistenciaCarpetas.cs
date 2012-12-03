@@ -8,7 +8,7 @@ using ExcepcionesPersonalizadas;
 namespace Persistencia
 {
 
-    internal class PersistenciaCarpetas : IPersistenciaCarpetas
+    internal class PersistenciaCarpetas : MarshalByRefObject, IPersistenciaCarpetas
     {
         //singleton
 

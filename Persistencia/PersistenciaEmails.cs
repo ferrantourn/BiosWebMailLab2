@@ -7,7 +7,7 @@ using Entidades;
 namespace Persistencia
 {
 
-    internal class PersistenciaEmails : IPersistenciaEmails
+    internal class PersistenciaEmails : MarshalByRefObject, IPersistenciaEmails
     {
         //singleton
 

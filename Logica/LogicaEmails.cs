@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entidades;
-using Persistencia;
+
 
 namespace Logica
 {
@@ -117,14 +117,15 @@ namespace Logica
             try
             {
                 ServicioRemoting.ServicioEmails _objServicioE = new ServicioRemoting.ServicioEmails();
-                IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
+                ServicioRemoting.ServicioCarpeta _objServicioC = new ServicioRemoting.ServicioCarpeta();
+                //IPersistenciaCarpetas pc = FabricaPersistencia.getPersistenciaCarpetas();
                 //Carpeta c = pc.BuscarCarpetaAlumno(ciAlumno, NumeroCarpeta);
-                Carpeta c = pc.BuscarCarpetaAlumno(carpeta);
+                Carpeta c = _objServicioC.BuscarCarpetaAlumno(carpeta);
                 if (c != null && c.NOMBRE_CARPETA.ToUpper() != "PAPELERA")
                 {
                     //Carpeta papelera = pc.BuscarCarpetaSistemaAlumno(ciAlumno, "Papelera");
                     carpeta.NOMBRE_CARPETA = "Papelera";
-                    Carpeta papelera = pc.BuscarCarpetaSistemaAlumno(carpeta);
+                    Carpeta papelera = _objServicioC.BuscarCarpetaSistemaAlumno(carpeta);
 
                     if (papelera != null)
                     {

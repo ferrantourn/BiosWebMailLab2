@@ -71,6 +71,7 @@
   <ItemGroup>
     <None Include="ConfiguracionRemoting.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

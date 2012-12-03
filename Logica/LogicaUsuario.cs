@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Xml;
 using Entidades;
-using Persistencia;
-using System.Xml;
 
 namespace Logica
 {
